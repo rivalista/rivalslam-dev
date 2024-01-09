@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "564894284019",
+    "project_id": "bookie-d58e4",
+    "storage_bucket": "bookie-d58e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564894284019:android:e3244e5f80226356575f86",
+        "android_client_info": {
+          "package_name": "com.mycompany.bookie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564894284019-bkjgd5k7ssrttm0dpgs76ufm3fug8jvn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.bookie",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "564894284019-lrohs8s4g61bco5o3in6rjhh6l4292i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqoXBRb0UagE8mC3U0PYBJ1yCiw37iG3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564894284019-jgk1na95gse40kambol19v7fmka7rr6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564894284019-6r398jfqjjufn85rsje5mohusud0fn7u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rivalslam.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564894284019:android:c5c0f5f0125d8212575f86",
+        "android_client_info": {
+          "package_name": "com.mycompany.rivalslam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564894284019-nnc8a19425acgj3cgtpdu89hv4b1crf8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.rivalslam",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "564894284019-lrohs8s4g61bco5o3in6rjhh6l4292i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqoXBRb0UagE8mC3U0PYBJ1yCiw37iG3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564894284019-jgk1na95gse40kambol19v7fmka7rr6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564894284019-6r398jfqjjufn85rsje5mohusud0fn7u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rivalslam.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564894284019:android:0162672a3fb9e2f2575f86",
+        "android_client_info": {
+          "package_name": "com.rivalslam.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564894284019-p14os2qbi8icgkij3ccuhrab69nfddtd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rivalslam.app",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "564894284019-lrohs8s4g61bco5o3in6rjhh6l4292i5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqoXBRb0UagE8mC3U0PYBJ1yCiw37iG3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564894284019-jgk1na95gse40kambol19v7fmka7rr6t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564894284019-6r398jfqjjufn85rsje5mohusud0fn7u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rivalslam.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
