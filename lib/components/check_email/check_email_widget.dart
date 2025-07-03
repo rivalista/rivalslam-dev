@@ -2,8 +2,9 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'check_email_model.dart';
 export 'check_email_model.dart';
 
@@ -11,7 +12,7 @@ class CheckEmailWidget extends StatefulWidget {
   const CheckEmailWidget({super.key});
 
   @override
-  _CheckEmailWidgetState createState() => _CheckEmailWidgetState();
+  State<CheckEmailWidget> createState() => _CheckEmailWidgetState();
 }
 
 class _CheckEmailWidgetState extends State<CheckEmailWidget> {
@@ -38,25 +39,23 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
-      alignment: const AlignmentDirectional(0.0, 0.0),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
         width: double.infinity,
         height: 320.0,
-        constraints: const BoxConstraints(
+        constraints: BoxConstraints(
           maxWidth: 570.0,
         ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(0.0),
           border: Border.all(
-            color: const Color(0xFFE0E3E7),
+            color: Color(0xFFE0E3E7),
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: EdgeInsets.all(24.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +69,7 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
                     borderRadius: 30.0,
                     borderWidth: 2.0,
                     buttonSize: 30.0,
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.close_rounded,
                       color: Color(0xFFD10527),
                       size: 15.0,
@@ -82,25 +81,44 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
                 child: Text(
                   'Authenticate  your email address',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Barlow Condensed',
-                        color: const Color(0xFF5FA73C),
+                        font: GoogleFonts.barlowCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
+                        ),
+                        color: Color(0xFF5FA73C),
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.w500,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
                       ),
                 ),
               ),
               Text(
                 'Please check your email and follow the instructions to confirm your email address.',
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Barlow Semi Condensed',
+                      font: GoogleFonts.barlowSemiCondensed(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
                       color: FlutterFlowTheme.of(context).secondaryText,
+                      letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                     ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -131,10 +149,14 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Barlow Semi Condensed',
+                                        font: GoogleFonts.barlowSemiCondensed(
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.italic,
+                                        ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
                                         fontSize: 20.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w500,
                                         fontStyle: FontStyle.italic,
                                       ),
@@ -148,7 +170,7 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -159,14 +181,23 @@ class _CheckEmailWidgetState extends State<CheckEmailWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('ProfileCreation');
+                        context.pushNamed(ProfileCreationWidget.routeName);
                       },
                       child: Text(
                         'Refresh',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
-                              color: const Color(0xFF118AE5),
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF118AE5),
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w500,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                               decoration: TextDecoration.underline,
                             ),
                       ),

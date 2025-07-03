@@ -3,17 +3,20 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'log_reg_model.dart';
 export 'log_reg_model.dart';
 
 class LogRegWidget extends StatefulWidget {
   const LogRegWidget({super.key});
 
+  static String routeName = 'LogReg';
+  static String routePath = '/logReg';
+
   @override
-  _LogRegWidgetState createState() => _LogRegWidgetState();
+  State<LogRegWidget> createState() => _LogRegWidgetState();
 }
 
 class _LogRegWidgetState extends State<LogRegWidget>
@@ -31,20 +34,21 @@ class _LogRegWidgetState extends State<LogRegWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    _model.emailLogController ??= TextEditingController();
+    )..addListener(() => safeSetState(() {}));
+
+    _model.emailLogTextController ??= TextEditingController();
     _model.emailLogFocusNode ??= FocusNode();
 
-    _model.passwordLogController ??= TextEditingController();
+    _model.passwordLogTextController ??= TextEditingController();
     _model.passwordLogFocusNode ??= FocusNode();
 
-    _model.emailRegController ??= TextEditingController();
+    _model.emailRegTextController ??= TextEditingController();
     _model.emailRegFocusNode ??= FocusNode();
 
-    _model.passwordRegController ??= TextEditingController();
+    _model.passwordRegTextController ??= TextEditingController();
     _model.passwordRegFocusNode ??= FocusNode();
 
-    _model.passwordRegCheckController ??= TextEditingController();
+    _model.passwordRegCheckTextController ??= TextEditingController();
     _model.passwordRegCheckFocusNode ??= FocusNode();
   }
 
@@ -57,35 +61,25 @@ class _LogRegWidgetState extends State<LogRegWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
                   width: double.infinity,
                   height: 200.0,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.transparent,
                   ),
                 ),
@@ -96,28 +90,46 @@ class _LogRegWidgetState extends State<LogRegWidget>
                     child: Column(
                       children: [
                         Align(
-                          alignment: const Alignment(0.0, 0),
+                          alignment: Alignment(0.0, 0),
                           child: TabBar(
                             labelColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
-                            unselectedLabelColor: const Color(0xFF5FA73C),
+                            unselectedLabelColor: Color(0xFF5FA73C),
                             labelStyle: FlutterFlowTheme.of(context)
                                 .titleMedium
                                 .override(
-                                  fontFamily: 'Barlow Condensed',
+                                  font: GoogleFonts.barlowCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 23.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
                                 ),
                             unselectedLabelStyle: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
-                                  fontFamily: 'Barlow Condensed',
+                                  font: GoogleFonts.barlowCondensed(
+                                    fontWeight: FontWeight.normal,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .headlineMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.normal,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .headlineMedium
+                                      .fontStyle,
                                 ),
                             indicatorColor:
                                 FlutterFlowTheme.of(context).customColor1,
-                            padding: const EdgeInsets.all(4.0),
-                            tabs: const [
+                            padding: EdgeInsets.all(4.0),
+                            tabs: [
                               Tab(
                                 text: 'Sign In',
                               ),
@@ -139,31 +151,76 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 20.0, 8.0, 20.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 300.0,
                                       child: TextFormField(
-                                        controller: _model.emailLogController,
+                                        controller:
+                                            _model.emailLogTextController,
                                         focusNode: _model.emailLogFocusNode,
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                    fontSize: 18.0,
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFF8B8D8E),
                                               width: 2.0,
                                             ),
@@ -181,7 +238,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                 BorderRadius.circular(0.0),
                                           ),
                                           errorBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFFD10527),
                                               width: 2.0,
                                             ),
@@ -190,7 +247,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                           ),
                                           focusedErrorBorder:
                                               OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFFD10527),
                                               width: 2.0,
                                             ),
@@ -201,51 +258,109 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
-                                              color: const Color(0xFF8B8D8E),
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF8B8D8E),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: _model
-                                            .emailLogControllerValidator
+                                            .emailLogTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 0.0, 8.0, 20.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 300.0,
                                       child: TextFormField(
                                         controller:
-                                            _model.passwordLogController,
+                                            _model.passwordLogTextController,
                                         focusNode: _model.passwordLogFocusNode,
                                         autofocus: true,
                                         obscureText:
                                             !_model.passwordLogVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Password ',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                    fontSize: 18.0,
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                  ),
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFF8B8D8E),
                                               width: 2.0,
                                             ),
@@ -284,7 +399,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                 BorderRadius.circular(0.0),
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .passwordLogVisibility =
                                                   !_model.passwordLogVisibility,
@@ -296,7 +411,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
-                                              color: const Color(0xFF8B8D8E),
+                                              color: Color(0xFF8B8D8E),
                                               size: 22.0,
                                             ),
                                           ),
@@ -304,12 +419,30 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
-                                              color: const Color(0xFF8B8D8E),
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF8B8D8E),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
-                                            .passwordLogControllerValidator
+                                            .passwordLogTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -322,8 +455,8 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                       final user =
                                           await authManager.signInWithEmail(
                                         context,
-                                        _model.emailLogController.text,
-                                        _model.passwordLogController.text,
+                                        _model.emailLogTextController.text,
+                                        _model.passwordLogTextController.text,
                                       );
                                       if (user == null) {
                                         return;
@@ -331,10 +464,10 @@ class _LogRegWidgetState extends State<LogRegWidget>
 
                                       if (currentUserEmailVerified == false) {
                                         context.pushNamedAuth(
-                                          'HomePage',
+                                          HomePageWidget.routeName,
                                           context.mounted,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: const TransitionInfo(
+                                            kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
                                               transitionType: PageTransitionType
                                                   .topToBottom,
@@ -345,10 +478,10 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         );
                                       } else {
                                         context.pushNamedAuth(
-                                          'HomePage',
+                                          HomePageWidget.routeName,
                                           context.mounted,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: const TransitionInfo(
+                                            kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
                                               transitionType: PageTransitionType
                                                   .topToBottom,
@@ -363,23 +496,35 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                     options: FFButtonOptions(
                                       width: 200.0,
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: const Color(0xFF395E25),
+                                      color: Color(0xFF395E25),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Barlow Semi Condensed',
+                                            font:
+                                                GoogleFonts.barlowSemiCondensed(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle: FontStyle.italic,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .customColor1,
                                             fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
                                             fontStyle: FontStyle.italic,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -387,7 +532,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 20.0, 0.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -396,9 +541,9 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed(
-                                          'ForgotPassword',
+                                          ForgotPasswordWidget.routeName,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: const TransitionInfo(
+                                            kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
                                               transitionType: PageTransitionType
                                                   .topToBottom,
@@ -414,11 +559,29 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .customColor1,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
@@ -429,31 +592,76 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 20.0, 8.0, 20.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 300.0,
                                       child: TextFormField(
-                                        controller: _model.emailRegController,
+                                        controller:
+                                            _model.emailRegTextController,
                                         focusNode: _model.emailRegFocusNode,
                                         autofocus: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Email',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                    fontSize: 18.0,
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFF8B8D8E),
                                               width: 2.0,
                                             ),
@@ -495,48 +703,110 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         keyboardType:
                                             TextInputType.emailAddress,
                                         validator: _model
-                                            .emailRegControllerValidator
+                                            .emailRegTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 0.0, 8.0, 20.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 300.0,
                                       child: TextFormField(
                                         controller:
-                                            _model.passwordRegController,
+                                            _model.passwordRegTextController,
                                         focusNode: _model.passwordRegFocusNode,
                                         autofocus: true,
                                         obscureText:
                                             !_model.passwordRegVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Password ',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                    fontSize: 18.0,
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFF8B8D8E),
                                               width: 2.0,
                                             ),
@@ -575,7 +845,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                 BorderRadius.circular(0.0),
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .passwordRegVisibility =
                                                   !_model.passwordRegVisibility,
@@ -587,7 +857,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
-                                              color: const Color(0xFF8B8D8E),
+                                              color: Color(0xFF8B8D8E),
                                               size: 22.0,
                                             ),
                                           ),
@@ -595,26 +865,44 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
-                                            .passwordRegControllerValidator
+                                            .passwordRegTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         8.0, 0.0, 8.0, 20.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 300.0,
                                       child: TextFormField(
-                                        controller:
-                                            _model.passwordRegCheckController,
+                                        controller: _model
+                                            .passwordRegCheckTextController,
                                         focusNode:
                                             _model.passwordRegCheckFocusNode,
                                         autofocus: true,
@@ -622,20 +910,64 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                             !_model.passwordRegCheckVisibility,
                                         decoration: InputDecoration(
                                           labelText: 'Password Сheck',
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
-                                                    color: const Color(0xFF8B8D8E),
-                                                    fontSize: 18.0,
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF8B8D8E),
+                                                fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts
+                                                    .barlowSemiCondensed(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Color(0xFF8B8D8E),
                                               width: 2.0,
                                             ),
@@ -674,7 +1006,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                 BorderRadius.circular(0.0),
                                           ),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model
                                                       .passwordRegCheckVisibility =
                                                   !_model
@@ -687,7 +1019,7 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                                   ? Icons.visibility_outlined
                                                   : Icons
                                                       .visibility_off_outlined,
-                                              color: const Color(0xFF8B8D8E),
+                                              color: Color(0xFF8B8D8E),
                                               size: 22.0,
                                             ),
                                           ),
@@ -695,14 +1027,32 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
-                                            .passwordRegCheckControllerValidator
+                                            .passwordRegCheckTextControllerValidator
                                             .asValidator(context),
                                       ),
                                     ),
@@ -710,12 +1060,13 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                   FFButtonWidget(
                                     onPressed: () async {
                                       GoRouter.of(context).prepareAuthEvent();
-                                      if (_model.passwordRegController.text !=
-                                          _model.passwordRegCheckController
+                                      if (_model
+                                              .passwordRegTextController.text !=
+                                          _model.passwordRegCheckTextController
                                               .text) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
-                                          const SnackBar(
+                                          SnackBar(
                                             content: Text(
                                               'Passwords don\'t match!',
                                             ),
@@ -727,8 +1078,8 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                       final user = await authManager
                                           .createAccountWithEmail(
                                         context,
-                                        _model.emailRegController.text,
-                                        _model.passwordRegController.text,
+                                        _model.emailRegTextController.text,
+                                        _model.passwordRegTextController.text,
                                       );
                                       if (user == null) {
                                         return;
@@ -737,7 +1088,8 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                       await authManager.sendEmailVerification();
 
                                       context.pushNamedAuth(
-                                          'ProfileCreation', context.mounted);
+                                          ProfileCreationWidget.routeName,
+                                          context.mounted);
 
                                       _model.leagueSuccess =
                                           await actions.userLeagueTeam(
@@ -748,28 +1100,47 @@ class _LogRegWidgetState extends State<LogRegWidget>
                                         currentUserUid,
                                       );
 
-                                      setState(() {});
+                                      safeSetState(() {});
                                     },
                                     text: 'Sign Up',
                                     options: FFButtonOptions(
                                       width: 200.0,
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: const Color(0xFF395E25),
+                                      color: Color(0xFF395E25),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Barlow Semi Condensed',
+                                            font:
+                                                GoogleFonts.barlowSemiCondensed(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
                                             color: FlutterFlowTheme.of(context)
                                                 .customColor1,
                                             fontSize: 20.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),

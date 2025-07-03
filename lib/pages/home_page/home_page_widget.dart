@@ -5,10 +5,11 @@ import '/components/score_board/score_board_widget.dart';
 import '/components/score_board2/score_board2_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -16,8 +17,11 @@ export 'home_page_model.dart';
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
 
+  static String routeName = 'HomePage';
+  static String routePath = '/homePage';
+
   @override
-  _HomePageWidgetState createState() => _HomePageWidgetState();
+  State<HomePageWidget> createState() => _HomePageWidgetState();
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
@@ -35,45 +39,44 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       _model.success = await HeadtoheadCall.call(
         h2h: '5-6',
       );
+
       if ((_model.success?.succeeded ?? true)) {
-        setState(() {
-          FFAppState().teamAname = (getJsonField(
-            (_model.success?.jsonBody ?? ''),
-            r'''$.response[:].teams.home.name''',
-            true,
-          ) as List)
-              .map<String>((s) => s.toString())
-              .toList().toList()
-              .cast<String>();
-        });
-        setState(() {
-          FFAppState().teamALogos = getJsonField(
-            (_model.success?.jsonBody ?? ''),
-            r'''$.response[:].teams.home.logo''',
-            true,
-          )!
-              .toList()
-              .cast<String>();
-        });
-        setState(() {
-          FFAppState().teamBname = (getJsonField(
-            (_model.success?.jsonBody ?? ''),
-            r'''$.response[:].teams.away.name''',
-            true,
-          ) as List)
-              .map<String>((s) => s.toString())
-              .toList().toList()
-              .cast<String>();
-        });
-        setState(() {
-          FFAppState().teamBlogos = getJsonField(
-            (_model.success?.jsonBody ?? ''),
-            r'''$.response[:].teams.away.logo''',
-            true,
-          )!
-              .toList()
-              .cast<String>();
-        });
+        FFAppState().teamAname = (getJsonField(
+          (_model.success?.jsonBody ?? ''),
+          r'''$.response[:].teams.home.name''',
+          true,
+        ) as List)
+            .map<String>((s) => s.toString())
+            .toList()
+            .toList()
+            .cast<String>();
+        safeSetState(() {});
+        FFAppState().teamALogos = getJsonField(
+          (_model.success?.jsonBody ?? ''),
+          r'''$.response[:].teams.home.logo''',
+          true,
+        )!
+            .toList()
+            .cast<String>();
+        safeSetState(() {});
+        FFAppState().teamBname = (getJsonField(
+          (_model.success?.jsonBody ?? ''),
+          r'''$.response[:].teams.away.name''',
+          true,
+        ) as List)
+            .map<String>((s) => s.toString())
+            .toList()
+            .toList()
+            .cast<String>();
+        safeSetState(() {});
+        FFAppState().teamBlogos = getJsonField(
+          (_model.success?.jsonBody ?? ''),
+          r'''$.response[:].teams.away.logo''',
+          true,
+        )!
+            .toList()
+            .cast<String>();
+        safeSetState(() {});
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -84,30 +87,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 fontSize: 12.0,
               ),
             ),
-            duration: const Duration(milliseconds: 4000),
+            duration: Duration(milliseconds: 4000),
             backgroundColor: FlutterFlowTheme.of(context).secondary,
           ),
         );
       }
 
-      setState(() {
-        FFAppState().scoreX = 390;
-      });
-      setState(() {
-        FFAppState().scoreY = 80;
-      });
-      setState(() {
-        FFAppState().home = true;
-      });
-      setState(() {
-        FFAppState().slambet = false;
-      });
-      setState(() {
-        FFAppState().trash = false;
-      });
-      setState(() {
-        FFAppState().games = false;
-      });
+      FFAppState().scoreX = 390;
+      safeSetState(() {});
+      FFAppState().scoreY = 80;
+      safeSetState(() {});
+      FFAppState().home = true;
+      safeSetState(() {});
+      FFAppState().slambet = false;
+      safeSetState(() {});
+      FFAppState().trash = false;
+      safeSetState(() {});
+      FFAppState().games = false;
+      safeSetState(() {});
     });
   }
 
@@ -120,15 +117,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
@@ -154,6 +142,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           );
         }
         final homePageHeadtoheadResponse = snapshot.data!;
+
         return Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryText,
@@ -182,16 +171,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               children: [
                                 wrapWithModel(
                                   model: _model.mainModel,
-                                  updateCallback: () => setState(() {}),
-                                  child: const MainWidget(),
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: MainWidget(),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      SizedBox(
+                                      Container(
                                         width:
                                             MediaQuery.sizeOf(context).width *
                                                 1.0,
@@ -208,7 +197,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
                                               ),
-                                              child: SizedBox(
+                                              child: Container(
                                                 width:
                                                     MediaQuery.sizeOf(context)
                                                             .width *
@@ -233,12 +222,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
-                                                            setState(() {
-                                                              FFAppState()
-                                                                  .scoreX = 250;
-                                                              FFAppState()
-                                                                  .scoreY = 80;
-                                                            });
+                                                            FFAppState()
+                                                                .scoreX = 250;
+                                                            FFAppState()
+                                                                .scoreY = 80;
+                                                            safeSetState(() {});
                                                           },
                                                           child: Container(
                                                             width: FFAppState()
@@ -257,11 +245,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 wrapWithModel(
                                                               model: _model
                                                                   .scoreBoardModel,
-                                                              updateCallback:
-                                                                  () => setState(
+                                                              updateCallback: () =>
+                                                                  safeSetState(
                                                                       () {}),
                                                               child:
-                                                                  const ScoreBoardWidget(),
+                                                                  ScoreBoardWidget(),
                                                             ),
                                                           ),
                                                         ),
@@ -277,13 +265,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
-                                                              setState(() {
-                                                                FFAppState()
-                                                                        .scoreX =
-                                                                    390;
-                                                                FFAppState()
-                                                                    .scoreY = 80;
-                                                              });
+                                                              FFAppState()
+                                                                  .scoreX = 390;
+                                                              FFAppState()
+                                                                  .scoreY = 80;
+                                                              safeSetState(
+                                                                  () {});
                                                             },
                                                             child: Container(
                                                               height: 80.0,
@@ -318,11 +305,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         () async {
                                                                       context
                                                                           .pushNamed(
-                                                                        'TrashTalk',
+                                                                        TrashTalkWidget
+                                                                            .routeName,
                                                                         extra: <String,
                                                                             dynamic>{
                                                                           kTransitionInfoKey:
-                                                                              const TransitionInfo(
+                                                                              TransitionInfo(
                                                                             hasTransition:
                                                                                 true,
                                                                             transitionType:
@@ -333,16 +321,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                         },
                                                                       );
 
-                                                                      setState(
-                                                                          () {
-                                                                        FFAppState().scoreX =
-                                                                            390;
-                                                                      });
-                                                                      setState(
-                                                                          () {
-                                                                        FFAppState().scoreY =
-                                                                            80;
-                                                                      });
+                                                                      FFAppState()
+                                                                              .scoreX =
+                                                                          390;
+                                                                      safeSetState(
+                                                                          () {});
+                                                                      FFAppState()
+                                                                          .scoreY = 80;
+                                                                      safeSetState(
+                                                                          () {});
                                                                     },
                                                                     child:
                                                                         Container(
@@ -427,7 +414,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: MediaQuery.sizeOf(context).height * 0.4,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Color(0xFF141414),
                             ),
                             child: Column(
@@ -437,7 +424,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   width: MediaQuery.sizeOf(context).width * 1.0,
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.1,
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     color: Color(0xFF141414),
                                   ),
                                   child: Row(
@@ -448,11 +435,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             MediaQuery.sizeOf(context).width *
                                                 0.2,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            SizedBox(
+                                            Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   0.2,
@@ -460,11 +447,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 children: [
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, 0.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   10.0,
                                                                   0.0,
@@ -485,7 +472,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.74, 0.6),
                                                     child: ClipRRect(
                                                       borderRadius:
@@ -510,7 +497,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             MediaQuery.sizeOf(context).width *
                                                 0.65,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -521,7 +508,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             .width *
                                                         0.65,
                                                 height: 100.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Column(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
@@ -539,13 +526,32 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Barlow Semi Condensed',
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryBackground,
                                                                   fontSize:
                                                                       13.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                           ),
                                                         ),
@@ -553,7 +559,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   5.0,
@@ -569,12 +575,31 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                     .of(context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Barlow Semi Condensed',
-                                                                  color: const Color(
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
                                                                       0xFF6E6E6E),
                                                                   fontSize:
                                                                       11.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                           ),
                                                         ],
@@ -592,7 +617,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             MediaQuery.sizeOf(context).width *
                                                 0.15,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -617,7 +642,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.3,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF141414),
+                                    color: Color(0xFF141414),
                                     borderRadius: BorderRadius.circular(0.0),
                                     border: Border.all(
                                       color: FlutterFlowTheme.of(context)
@@ -660,11 +685,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: 80.0,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Color(0xFF141414),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 20.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -673,7 +698,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.2,
                                     height: 100.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -683,7 +708,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           width: 42.0,
                                           height: 42.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
@@ -700,7 +725,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       width: MediaQuery.sizeOf(context).width *
                                           0.75,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -708,18 +733,40 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             child: AutoSizeText(
                                               'Tom Brady is playing for The Patriots tonight. Trash talk your rivals!',
                                               maxLines: 2,
+                                              minFontSize: 13.0,
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'Barlow Semi Condensed',
+                                                        font: GoogleFonts
+                                                            .barlowSemiCondensed(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         color: FlutterFlowTheme
                                                                 .of(context)
                                                             .secondaryBackground,
                                                         fontSize: 12.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
                                                       ),
-                                              minFontSize: 13.0,
                                             ),
                                           ),
                                         ],
@@ -738,11 +785,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: 80.0,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: wrapWithModel(
                               model: _model.scoreBoard2Model,
-                              updateCallback: () => setState(() {}),
-                              child: const ScoreBoard2Widget(),
+                              updateCallback: () => safeSetState(() {}),
+                              child: ScoreBoard2Widget(),
                             ),
                           ),
                         ],
@@ -753,7 +800,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: 100.0,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Color(0xFF141414),
                             ),
                             child: Row(
@@ -763,25 +810,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 Container(
                                   width: MediaQuery.sizeOf(context).width * 0.2,
                                   height: 100.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: SizedBox(
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.2,
                                           child: Stack(
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 0.0, 0.0),
                                                   child: ClipRRect(
@@ -798,7 +845,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 ),
                                               ),
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.74, 0.6),
                                                 child: ClipRRect(
                                                   borderRadius:
@@ -822,7 +869,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 Container(
                                   width: MediaQuery.sizeOf(context).width * 0.6,
                                   height: 100.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -831,7 +878,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             MediaQuery.sizeOf(context).width *
                                                 0.6,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
@@ -847,19 +894,41 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'Barlow Condensed',
+                                                          font: GoogleFonts
+                                                              .barlowCondensed(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .primaryBackground,
                                                           fontSize: 13.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
                                                         ),
                                                   ),
                                                 ),
                                               ],
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
                                               child: Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -870,11 +939,33 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'Barlow Semi Condensed',
+                                                          font: GoogleFonts
+                                                              .barlowSemiCondensed(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
                                                           color:
-                                                              const Color(0xFF6E6E6E),
+                                                              Color(0xFF6E6E6E),
                                                           fontSize: 11.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
                                                         ),
                                                   ),
                                                 ],
@@ -890,7 +981,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   width:
                                       MediaQuery.sizeOf(context).width * 0.15,
                                   height: 100.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -915,14 +1006,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Container(
                               width: MediaQuery.sizeOf(context).width * 1.0,
                               height: 100.0,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Color(0xFF141414),
                               ),
                               child: Row(
@@ -932,21 +1023,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.2,
                                     height: 100.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        SizedBox(
+                                        Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.2,
                                           child: Stack(
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           10.0, 0.0, 0.0, 0.0),
                                                   child: ClipRRect(
@@ -972,7 +1063,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.6,
                                     height: 100.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
@@ -981,7 +1072,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               MediaQuery.sizeOf(context).width *
                                                   0.6,
                                           height: 100.0,
-                                          decoration: const BoxDecoration(),
+                                          decoration: BoxDecoration(),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -998,19 +1089,38 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryBackground,
                                                                 fontSize: 13.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                               ),
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 0.0),
                                                 child: Row(
@@ -1024,11 +1134,30 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Semi Condensed',
-                                                                color: const Color(
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
                                                                     0xFF6E6E6E),
                                                                 fontSize: 11.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                               ),
                                                     ),
                                                   ],
@@ -1044,9 +1173,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.15,
                                     height: 100.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 24.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1081,8 +1210,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               wrapWithModel(
                 model: _model.menuBarModel,
-                updateCallback: () => setState(() {}),
-                child: const MenuBarWidget(),
+                updateCallback: () => safeSetState(() {}),
+                child: MenuBarWidget(),
               ),
             ],
           ),

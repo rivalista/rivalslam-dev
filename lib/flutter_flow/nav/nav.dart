@@ -6,14 +6,18 @@ import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
-import '/index.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
+import '/backend/push_notifications/push_notifications_handler.dart'
+    show PushNotificationsHandler;
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -72,213 +76,363 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const SignInWidget() : const SplashWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : WelcomeViewWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? const SignInWidget() : const SplashWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? HomePageWidget()
+              : WelcomeViewWidget(),
         ),
         FFRoute(
-          name: 'splash',
-          path: '/splash',
-          builder: (context, params) => const SplashWidget(),
+          name: SplashWidget.routeName,
+          path: SplashWidget.routePath,
+          builder: (context, params) => SplashWidget(),
         ),
         FFRoute(
-          name: 'TrashTalk',
-          path: '/trashTalk',
-          builder: (context, params) => const TrashTalkWidget(),
+          name: TrashTalkWidget.routeName,
+          path: TrashTalkWidget.routePath,
+          builder: (context, params) => TrashTalkWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          name: HomePageWidget.routeName,
+          path: HomePageWidget.routePath,
+          builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
-          name: 'Login',
-          path: '/login',
-          builder: (context, params) => const LoginWidget(),
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
         ),
         FFRoute(
-          name: 'Signup_old',
-          path: '/signupOld',
-          builder: (context, params) => const SignupOldWidget(),
+          name: SignupOldWidget.routeName,
+          path: SignupOldWidget.routePath,
+          builder: (context, params) => SignupOldWidget(),
         ),
         FFRoute(
-          name: 'CometChat',
-          path: '/cometChat',
-          builder: (context, params) => const CometChatWidget(),
+          name: CometChatWidget.routeName,
+          path: CometChatWidget.routePath,
+          builder: (context, params) => CometChatWidget(),
         ),
         FFRoute(
-          name: 'ChatPage',
-          path: '/chatPage',
+          name: ChatPageWidget.routeName,
+          path: ChatPageWidget.routePath,
           asyncParams: {
             'chatUser': getDoc(['users'], UsersRecord.fromSnapshot),
           },
           builder: (context, params) => ChatPageWidget(
-            chatUser: params.getParam('chatUser', ParamType.Document),
+            chatUser: params.getParam(
+              'chatUser',
+              ParamType.Document,
+            ),
             chatRef: params.getParam(
-                'chatRef', ParamType.DocumentReference, false, ['chats']),
+              'chatRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['chats'],
+            ),
           ),
         ),
         FFRoute(
-          name: 'AllChatsPage',
-          path: '/allChatsPage',
-          builder: (context, params) => const AllChatsPageWidget(),
+          name: AllChatsPageWidget.routeName,
+          path: AllChatsPageWidget.routePath,
+          builder: (context, params) => AllChatsPageWidget(),
         ),
         FFRoute(
-          name: 'CreateGroupChatPage',
-          path: '/createGroupChatPage',
-          builder: (context, params) => const CreateGroupChatPageWidget(),
+          name: CreateGroupChatPageWidget.routeName,
+          path: CreateGroupChatPageWidget.routePath,
+          builder: (context, params) => CreateGroupChatPageWidget(),
         ),
         FFRoute(
-          name: 'inviteUser',
-          path: '/inviteUser',
-          builder: (context, params) => const InviteUserWidget(),
+          name: InviteUserWidget.routeName,
+          path: InviteUserWidget.routePath,
+          builder: (context, params) => InviteUserWidget(),
         ),
         FFRoute(
-          name: 'onboarding',
-          path: '/onboarding',
-          builder: (context, params) => const OnboardingWidget(),
+          name: OnboardingWidget.routeName,
+          path: OnboardingWidget.routePath,
+          builder: (context, params) => OnboardingWidget(),
         ),
         FFRoute(
-          name: 'Welcome',
-          path: '/welcome',
-          builder: (context, params) => const WelcomeWidget(),
+          name: WelcomeWidget.routeName,
+          path: WelcomeWidget.routePath,
+          builder: (context, params) => WelcomeWidget(),
         ),
         FFRoute(
-          name: 'Profile',
-          path: '/profile',
-          builder: (context, params) => const ProfileWidget(),
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
+          builder: (context, params) => ProfileWidget(),
         ),
         FFRoute(
-          name: 'EditProfile',
-          path: '/editProfile',
-          builder: (context, params) => const EditProfileWidget(),
+          name: EditProfileWidget.routeName,
+          path: EditProfileWidget.routePath,
+          builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
-          name: 'ForgotPassword',
-          path: '/forgotPassword',
-          builder: (context, params) => const ForgotPasswordWidget(),
+          name: ForgotPasswordWidget.routeName,
+          path: ForgotPasswordWidget.routePath,
+          builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'AboutMe',
-          path: '/aboutMe',
+          name: AboutMeWidget.routeName,
+          path: AboutMeWidget.routePath,
           builder: (context, params) => AboutMeWidget(
-            userName: params.getParam('userName', ParamType.String),
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'LogReg',
-          path: '/logReg',
-          builder: (context, params) => const LogRegWidget(),
+          name: LogRegWidget.routeName,
+          path: LogRegWidget.routePath,
+          builder: (context, params) => LogRegWidget(),
         ),
         FFRoute(
-          name: 'FellowFilledin',
-          path: '/fellowFilledin',
+          name: FellowFilledinWidget.routeName,
+          path: FellowFilledinWidget.routePath,
           builder: (context, params) => FellowFilledinWidget(
-            userName: params.getParam('userName', ParamType.String),
-            college: params.getParam('college', ParamType.String),
-            homeTowm: params.getParam('homeTowm', ParamType.String),
-            livesIn: params.getParam('livesIn', ParamType.String),
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+            college: params.getParam(
+              'college',
+              ParamType.String,
+            ),
+            homeTowm: params.getParam(
+              'homeTowm',
+              ParamType.String,
+            ),
+            livesIn: params.getParam(
+              'livesIn',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'InviteFriendA',
-          path: '/inviteFriendA',
-          builder: (context, params) => const InviteFriendAWidget(),
+          name: InviteFriendAWidget.routeName,
+          path: InviteFriendAWidget.routePath,
+          builder: (context, params) => InviteFriendAWidget(),
         ),
         FFRoute(
-          name: 'OnboardingFavorite',
-          path: '/onboardingFavorite',
-          builder: (context, params) => const OnboardingFavoriteWidget(),
+          name: OnboardingFavoriteWidget.routeName,
+          path: OnboardingFavoriteWidget.routePath,
+          builder: (context, params) => OnboardingFavoriteWidget(),
         ),
         FFRoute(
-          name: 'ProfileCreation',
-          path: '/profileCreation',
-          builder: (context, params) => const ProfileCreationWidget(),
+          name: ProfileCreationWidget.routeName,
+          path: ProfileCreationWidget.routePath,
+          builder: (context, params) => ProfileCreationWidget(),
         ),
         FFRoute(
-          name: 'OnboardingRivals',
-          path: '/onboardingRivals',
-          builder: (context, params) => const OnboardingRivalsWidget(),
+          name: OnboardingRivalsWidget.routeName,
+          path: OnboardingRivalsWidget.routePath,
+          builder: (context, params) => OnboardingRivalsWidget(),
         ),
         FFRoute(
-          name: 'InviteFriendB',
-          path: '/inviteFriendB',
-          builder: (context, params) => const InviteFriendBWidget(),
+          name: InviteFriendBWidget.routeName,
+          path: InviteFriendBWidget.routePath,
+          builder: (context, params) => InviteFriendBWidget(),
         ),
         FFRoute(
-          name: 'Home_new',
-          path: '/homeNew',
-          builder: (context, params) => const HomeNewWidget(),
+          name: HomeNewWidget.routeName,
+          path: HomeNewWidget.routePath,
+          builder: (context, params) => HomeNewWidget(),
         ),
         FFRoute(
-          name: 'SignIn',
-          path: '/signIn',
-          builder: (context, params) => const SignInWidget(),
+          name: SignInWidget.routeName,
+          path: SignInWidget.routePath,
+          builder: (context, params) => SignInWidget(),
         ),
         FFRoute(
-          name: 'FriendAll_List',
-          path: '/friendAllList',
-          builder: (context, params) => const FriendAllListWidget(),
+          name: FriendAllListWidget.routeName,
+          path: FriendAllListWidget.routePath,
+          builder: (context, params) => FriendAllListWidget(),
         ),
         FFRoute(
-          name: 'FriendsAcceptOptions',
-          path: '/friendsAcceptOptions',
-          builder: (context, params) => const FriendsAcceptOptionsWidget(),
+          name: FriendsAcceptOptionsWidget.routeName,
+          path: FriendsAcceptOptionsWidget.routePath,
+          builder: (context, params) => FriendsAcceptOptionsWidget(),
         ),
         FFRoute(
-          name: 'FriendsAdd_InviteOption',
-          path: '/friendsAddInviteOption',
-          builder: (context, params) => const FriendsAddInviteOptionWidget(),
+          name: FriendsAddInviteOptionWidget.routeName,
+          path: FriendsAddInviteOptionWidget.routePath,
+          builder: (context, params) => FriendsAddInviteOptionWidget(),
         ),
         FFRoute(
-          name: 'FriendsAddSearch',
-          path: '/friendsAddSearch',
-          builder: (context, params) => const FriendsAddSearchWidget(),
+          name: FriendsAddSearchWidget.routeName,
+          path: FriendsAddSearchWidget.routePath,
+          builder: (context, params) => FriendsAddSearchWidget(),
         ),
         FFRoute(
-          name: 'FriendsDecline',
-          path: '/friendsDecline',
-          builder: (context, params) => const FriendsDeclineWidget(),
+          name: FriendsDeclineWidget.routeName,
+          path: FriendsDeclineWidget.routePath,
+          builder: (context, params) => FriendsDeclineWidget(),
         ),
         FFRoute(
-          name: 'FriendsLeaderboard',
-          path: '/friendsLeaderboard',
-          builder: (context, params) => const FriendsLeaderboardWidget(),
+          name: FriendsLeaderboardWidget.routeName,
+          path: FriendsLeaderboardWidget.routePath,
+          builder: (context, params) => FriendsLeaderboardWidget(),
         ),
         FFRoute(
-          name: 'FriendsMyBuddies',
-          path: '/friendsMyBuddies',
-          builder: (context, params) => const FriendsMyBuddiesWidget(),
+          name: FriendsMyBuddiesWidget.routeName,
+          path: FriendsMyBuddiesWidget.routePath,
+          builder: (context, params) => FriendsMyBuddiesWidget(),
         ),
         FFRoute(
-          name: 'FriendsSearchAdded',
-          path: '/friendsSearchAdded',
-          builder: (context, params) => const FriendsSearchAddedWidget(),
+          name: FriendsSearchAddedWidget.routeName,
+          path: FriendsSearchAddedWidget.routePath,
+          builder: (context, params) => FriendsSearchAddedWidget(),
         ),
         FFRoute(
-          name: 'FriendsSwipe',
-          path: '/friendsSwipe',
-          builder: (context, params) => const FriendsSwipeWidget(),
+          name: FriendsSwipeWidget.routeName,
+          path: FriendsSwipeWidget.routePath,
+          builder: (context, params) => FriendsSwipeWidget(),
         ),
         FFRoute(
-          name: 'FriendsSwipe2',
-          path: '/friendsSwipe2',
-          builder: (context, params) => const FriendsSwipe2Widget(),
+          name: FriendsSwipe2Widget.routeName,
+          path: FriendsSwipe2Widget.routePath,
+          builder: (context, params) => FriendsSwipe2Widget(),
         ),
         FFRoute(
-          name: 'LeaderboradAdded',
-          path: '/leaderboradAdded',
-          builder: (context, params) => const LeaderboradAddedWidget(),
+          name: LeaderboradAddedWidget.routeName,
+          path: LeaderboradAddedWidget.routePath,
+          builder: (context, params) => LeaderboradAddedWidget(),
         ),
         FFRoute(
-          name: 'SignUp',
-          path: '/signUp',
-          builder: (context, params) => const SignUpWidget(),
+          name: SignUpWidget.routeName,
+          path: SignUpWidget.routePath,
+          builder: (context, params) => SignUpWidget(),
+        ),
+        FFRoute(
+          name: SignUpCopyWidget.routeName,
+          path: SignUpCopyWidget.routePath,
+          builder: (context, params) => SignUpCopyWidget(),
+        ),
+        FFRoute(
+          name: ProfileCreationVIewWidget.routeName,
+          path: ProfileCreationVIewWidget.routePath,
+          builder: (context, params) => ProfileCreationVIewWidget(),
+        ),
+        FFRoute(
+          name: SignInCopyWidget.routeName,
+          path: SignInCopyWidget.routePath,
+          builder: (context, params) => SignInCopyWidget(),
+        ),
+        FFRoute(
+          name: WelcomeViewWidget.routeName,
+          path: WelcomeViewWidget.routePath,
+          builder: (context, params) => WelcomeViewWidget(),
+        ),
+        FFRoute(
+          name: SplashViewWidget.routeName,
+          path: SplashViewWidget.routePath,
+          builder: (context, params) => SplashViewWidget(),
+        ),
+        FFRoute(
+          name: SignInViewWidget.routeName,
+          path: SignInViewWidget.routePath,
+          builder: (context, params) => SignInViewWidget(),
+        ),
+        FFRoute(
+          name: SignUpViewWidget.routeName,
+          path: SignUpViewWidget.routePath,
+          builder: (context, params) => SignUpViewWidget(),
+        ),
+        FFRoute(
+          name: ForgotPasswordViewWidget.routeName,
+          path: ForgotPasswordViewWidget.routePath,
+          builder: (context, params) => ForgotPasswordViewWidget(),
+        ),
+        FFRoute(
+          name: AboutMeViewWidget.routeName,
+          path: AboutMeViewWidget.routePath,
+          builder: (context, params) => AboutMeViewWidget(
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: TapLeaguesViewWidget.routeName,
+          path: TapLeaguesViewWidget.routePath,
+          builder: (context, params) => TapLeaguesViewWidget(
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+            college: params.getParam(
+              'college',
+              ParamType.String,
+            ),
+            homeTowm: params.getParam(
+              'homeTowm',
+              ParamType.String,
+            ),
+            livesIn: params.getParam(
+              'livesIn',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: ChooseFavouritesViewWidget.routeName,
+          path: ChooseFavouritesViewWidget.routePath,
+          builder: (context, params) => ChooseFavouritesViewWidget(),
+        ),
+        FFRoute(
+          name: ChooseRivalsViewWidget.routeName,
+          path: ChooseRivalsViewWidget.routePath,
+          builder: (context, params) => ChooseRivalsViewWidget(),
+        ),
+        FFRoute(
+          name: TapLeaguesViewCopyWidget.routeName,
+          path: TapLeaguesViewCopyWidget.routePath,
+          builder: (context, params) => TapLeaguesViewCopyWidget(
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+            college: params.getParam(
+              'college',
+              ParamType.String,
+            ),
+            homeTowm: params.getParam(
+              'homeTowm',
+              ParamType.String,
+            ),
+            livesIn: params.getParam(
+              'livesIn',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: TapLeaguesViewCopy2Widget.routeName,
+          path: TapLeaguesViewCopy2Widget.routePath,
+          builder: (context, params) => TapLeaguesViewCopy2Widget(
+            userName: params.getParam(
+              'userName',
+              ParamType.String,
+            ),
+            college: params.getParam(
+              'college',
+              ParamType.String,
+            ),
+            homeTowm: params.getParam(
+              'homeTowm',
+              ParamType.String,
+            ),
+            livesIn: params.getParam(
+              'livesIn',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -355,7 +509,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -374,7 +528,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -395,10 +549,11 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
-  ]) {
+    StructBuilder<T>? structBuilder,
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -411,8 +566,13 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList,
-        collectionNamePath: collectionNamePath);
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+      collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
+    );
   }
 }
 
@@ -444,12 +604,13 @@ class FFRoute {
           }
 
           if (requireAuth && !appStateNotifier.loggedIn) {
-            appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/splash';
+            appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
+            return '/welcomeView';
           }
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(
@@ -458,18 +619,14 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50.0,
-                    height: 50.0,
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        FlutterFlowTheme.of(context).primary,
-                      ),
-                    ),
+              ? Container(
+                  color: Colors.transparent,
+                  child: Image.asset(
+                    'assets/images/Screenshot_2024-01-18_at_3.49.49_PM.png',
+                    fit: BoxFit.fill,
                   ),
                 )
-              : page;
+              : PushNotificationsHandler(child: page);
 
           final transitionInfo = state.transitionInfo;
           return transitionInfo.hasTransition
@@ -511,7 +668,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
@@ -522,7 +679,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;
@@ -532,4 +689,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

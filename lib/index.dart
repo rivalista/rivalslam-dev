@@ -56,3 +56,29 @@ export '/friends/friends_swipe2/friends_swipe2_widget.dart'
 export '/friends/leaderborad_added/leaderborad_added_widget.dart'
     show LeaderboradAddedWidget;
 export '/onboarding/sign_up/sign_up_widget.dart' show SignUpWidget;
+export '/onboarding/sign_up_copy/sign_up_copy_widget.dart'
+    show SignUpCopyWidget;
+export '/rsv2/onboarding/profile_creation_v_iew/profile_creation_v_iew_widget.dart'
+    show ProfileCreationVIewWidget;
+export '/onboarding/sign_in_copy/sign_in_copy_widget.dart'
+    show SignInCopyWidget;
+export '/rsv2/welcome/welcome_view/welcome_view_widget.dart'
+    show WelcomeViewWidget;
+export '/rsv2/welcome/splash_view/splash_view_widget.dart'
+    show SplashViewWidget;
+export '/rsv2/sign_in_view/sign_in_view_widget.dart' show SignInViewWidget;
+export '/rsv2/auth/sign_up_view/sign_up_view_widget.dart' show SignUpViewWidget;
+export '/rsv2/auth/forgot_password_view/forgot_password_view_widget.dart'
+    show ForgotPasswordViewWidget;
+export '/rsv2/onboarding/about_me_view/about_me_view_widget.dart'
+    show AboutMeViewWidget;
+export '/rsv2/onboarding/tap_leagues_view/tap_leagues_view_widget.dart'
+    show TapLeaguesViewWidget;
+export '/rsv2/onboarding/choose_favourites_view/choose_favourites_view_widget.dart'
+    show ChooseFavouritesViewWidget;
+export '/rsv2/onboarding/choose_rivals_view/choose_rivals_view_widget.dart'
+    show ChooseRivalsViewWidget;
+export '/rsv2/onboarding/tap_leagues_view_copy/tap_leagues_view_copy_widget.dart'
+    show TapLeaguesViewCopyWidget;
+export '/rsv2/onboarding/tap_leagues_view_copy2/tap_leagues_view_copy2_widget.dart'
+    show TapLeaguesViewCopy2Widget;

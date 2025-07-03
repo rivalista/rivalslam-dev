@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 class FriendsMyBuddiesModel extends FlutterFlowModel<FriendsMyBuddiesWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // Model for buddies component.
   late BuddiesModel buddiesModel;
@@ -26,8 +27,6 @@ class FriendsMyBuddiesModel extends FlutterFlowModel<FriendsMyBuddiesWidget> {
   // Model for buddiesList component.
   late BuddiesListModel buddiesListModel2;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     buddiesModel = createModel(context, () => BuddiesModel());
@@ -39,7 +38,6 @@ class FriendsMyBuddiesModel extends FlutterFlowModel<FriendsMyBuddiesWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     buddiesModel.dispose();
     buddiesInviteModel.dispose();
@@ -47,8 +45,4 @@ class FriendsMyBuddiesModel extends FlutterFlowModel<FriendsMyBuddiesWidget> {
     buddiesListModel1.dispose();
     buddiesListModel2.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -8,18 +8,17 @@ class FriendsAddInviteOptionModel
     extends FlutterFlowModel<FriendsAddInviteOptionWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // Model for FriendsICardInviteRequest component.
   late FriendsICardInviteRequestModel friendsICardInviteRequestModel1;
   // Model for FriendsICardInviteRequest component.
   late FriendsICardInviteRequestModel friendsICardInviteRequestModel2;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -31,13 +30,8 @@ class FriendsAddInviteOptionModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     friendsICardInviteRequestModel1.dispose();
     friendsICardInviteRequestModel2.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

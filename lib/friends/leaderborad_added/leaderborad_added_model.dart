@@ -9,11 +9,12 @@ import 'package:flutter/material.dart';
 class LeaderboradAddedModel extends FlutterFlowModel<LeaderboradAddedWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // Model for buddies component.
   late BuddiesModel buddiesModel1;
@@ -28,8 +29,6 @@ class LeaderboradAddedModel extends FlutterFlowModel<LeaderboradAddedWidget> {
   // Model for buddiesList component.
   late BuddiesListModel buddiesListModel2;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     buddiesModel1 = createModel(context, () => BuddiesModel());
@@ -42,7 +41,6 @@ class LeaderboradAddedModel extends FlutterFlowModel<LeaderboradAddedWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     buddiesModel1.dispose();
     buddiesModel2.dispose();
@@ -51,8 +49,4 @@ class LeaderboradAddedModel extends FlutterFlowModel<LeaderboradAddedWidget> {
     buddiesInviteModel.dispose();
     buddiesListModel2.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -11,7 +11,6 @@ class CreateGroupChatPageModel
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   // State field(s) for CheckboxListTile widget.
-
   Map<UsersRecord, bool> checkboxListTileValueMap = {};
   List<UsersRecord> get checkboxListTileCheckedItems =>
       checkboxListTileValueMap.entries
@@ -22,8 +21,6 @@ class CreateGroupChatPageModel
   // Stores action output result for [Group Chat Action] action in Button widget.
   ChatsRecord? groupChat;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
@@ -32,8 +29,4 @@ class CreateGroupChatPageModel
     textFieldFocusNode?.dispose();
     textController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

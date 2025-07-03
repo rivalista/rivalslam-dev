@@ -8,15 +8,12 @@ import 'package:flutter/material.dart';
 class FriendsAddSearchModel extends FlutterFlowModel<FriendsAddSearchWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for FriendsICardAdd component.
   late FriendsICardAddModel friendsICardAddModel;
   // Model for FriendsInviteWaiting component.
   late FriendsInviteWaitingModel friendsInviteWaitingModel;
   // Model for FriendsICardAccepted component.
   late FriendsICardAcceptedModel friendsICardAcceptedModel;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -29,13 +26,8 @@ class FriendsAddSearchModel extends FlutterFlowModel<FriendsAddSearchWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     friendsICardAddModel.dispose();
     friendsInviteWaitingModel.dispose();
     friendsICardAcceptedModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

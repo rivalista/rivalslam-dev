@@ -4,6 +4,7 @@ import '/components/menu_bar/menu_bar_widget.dart';
 import '/components/score_board/score_board_widget.dart';
 import '/components/score_board2/score_board2_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'home_page_widget.dart' show HomePageWidget;
 import 'package:flutter/material.dart';
 
@@ -21,8 +22,6 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
   // Model for menuBar component.
   late MenuBarModel menuBarModel;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     mainModel = createModel(context, () => MainModel());
@@ -38,8 +37,4 @@ class HomePageModel extends FlutterFlowModel<HomePageWidget> {
     scoreBoard2Model.dispose();
     menuBarModel.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

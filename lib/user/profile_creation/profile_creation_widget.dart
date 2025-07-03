@@ -1,11 +1,10 @@
-import '/components/check_email/check_email_widget.dart';
 import '/components/image_browser/image_browser_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'profile_creation_model.dart';
 export 'profile_creation_model.dart';
@@ -13,8 +12,11 @@ export 'profile_creation_model.dart';
 class ProfileCreationWidget extends StatefulWidget {
   const ProfileCreationWidget({super.key});
 
+  static String routeName = 'ProfileCreation';
+  static String routePath = '/profileCreation';
+
   @override
-  _ProfileCreationWidgetState createState() => _ProfileCreationWidgetState();
+  State<ProfileCreationWidget> createState() => _ProfileCreationWidgetState();
 }
 
 class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
@@ -27,31 +29,7 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
     super.initState();
     _model = createModel(context, () => ProfileCreationModel());
 
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        enableDrag: false,
-        context: context,
-        builder: (context) {
-          return GestureDetector(
-            onTap: () => _model.unfocusNode.canRequestFocus
-                ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                : FocusScope.of(context).unfocus(),
-            child: Padding(
-              padding: MediaQuery.viewInsetsOf(context),
-              child: SizedBox(
-                height: MediaQuery.sizeOf(context).height * 1.0,
-                child: const CheckEmailWidget(),
-              ),
-            ),
-          );
-        },
-      ).then((value) => safeSetState(() {}));
-    });
-
-    _model.userNameController ??= TextEditingController();
+    _model.userNameTextController ??= TextEditingController();
     _model.userNameFocusNode ??= FocusNode();
   }
 
@@ -64,21 +42,13 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
@@ -98,27 +68,27 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                     ),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 38.0, 0.0, 8.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 0.0, 0.0),
                                   child: FlutterFlowIconButton(
                                     borderColor: Colors.transparent,
                                     borderRadius: 30.0,
                                     borderWidth: 1.0,
                                     buttonSize: 50.0,
-                                    icon: const Icon(
+                                    icon: Icon(
                                       Icons.arrow_back_rounded,
                                       color: Colors.white,
                                       size: 30.0,
@@ -129,16 +99,20 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       50.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     'CREATE PROFILE',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Barlow',
+                                          font: GoogleFonts.barlow(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                           color: Colors.white,
                                           fontSize: 24.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle: FontStyle.italic,
                                         ),
@@ -148,20 +122,34 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Step 1/5',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     fontSize: 15.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               width: 110.0,
@@ -177,15 +165,14 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  setState(() {
-                                    FFAppState().profileImg =
-                                        FFAppState().profileImg;
-                                  });
+                                  FFAppState().profileImg =
+                                      FFAppState().profileImg;
+                                  safeSetState(() {});
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(55.0),
-                                  child: Image.network(
-                                    FFAppState().profileImg,
+                                  child: Image.asset(
+                                    'assets/images/Snaps_Camera.png',
                                     width: 110.0,
                                     height: 110.0,
                                     fit: BoxFit.cover,
@@ -200,10 +187,10 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(90.0, 220.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(90.0, 220.0, 0.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).secondaryText,
                       borderRadius: 20.0,
@@ -223,13 +210,13 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                           context: context,
                           builder: (context) {
                             return GestureDetector(
-                              onTap: () => _model.unfocusNode.canRequestFocus
-                                  ? FocusScope.of(context)
-                                      .requestFocus(_model.unfocusNode)
-                                  : FocusScope.of(context).unfocus(),
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                FocusManager.instance.primaryFocus?.unfocus();
+                              },
                               child: Padding(
                                 padding: MediaQuery.viewInsetsOf(context),
-                                child: const SizedBox(
+                                child: Container(
                                   height: 340.0,
                                   child: ImageBrowserWidget(),
                                 ),
@@ -246,9 +233,9 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
             Opacity(
               opacity: 0.7,
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                 child: TextFormField(
-                  controller: _model.userNameController,
+                  controller: _model.userNameTextController,
                   focusNode: _model.userNameFocusNode,
                   autofocus: true,
                   obscureText: false,
@@ -256,13 +243,41 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                     labelText: 'Username',
                     labelStyle:
                         FlutterFlowTheme.of(context).labelMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
                               color: Colors.white,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
                             ),
                     hintStyle:
                         FlutterFlowTheme.of(context).labelMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
                               color: Colors.white,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
                             ),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
@@ -293,21 +308,32 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     contentPadding:
-                        const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                   ),
                   style: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Barlow Semi Condensed',
+                        font: GoogleFonts.barlowSemiCondensed(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
                         fontSize: 14.0,
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleSmall.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleSmall.fontStyle,
                       ),
-                  validator:
-                      _model.userNameControllerValidator.asValidator(context),
+                  validator: _model.userNameTextControllerValidator
+                      .asValidator(context),
                 ),
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(1.0, 0.0),
+              alignment: AlignmentDirectional(1.0, 0.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 106.0, 16.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 106.0, 16.0, 0.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -315,15 +341,15 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                   highlightColor: Colors.transparent,
                   onTap: () async {
                     context.pushNamed(
-                      'AboutMe',
+                      AboutMeWidget.routeName,
                       queryParameters: {
                         'userName': serializeParam(
-                          _model.userNameController.text,
+                          _model.userNameTextController.text,
                           ParamType.String,
                         ),
                       }.withoutNulls,
                       extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
+                        kTransitionInfoKey: TransitionInfo(
                           hasTransition: true,
                           transitionType: PageTransitionType.bottomToTop,
                           duration: Duration(milliseconds: 200),
@@ -332,7 +358,7 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                     );
                   },
                   child: RichText(
-                    textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                    textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
                       children: [
                         TextSpan(
@@ -340,18 +366,36 @@ class _ProfileCreationWidgetState extends State<ProfileCreationWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,
+                                ),
                                 color:
                                     FlutterFlowTheme.of(context).customColor1,
                                 fontSize: 24.0,
+                                letterSpacing: 0.0,
                                 fontWeight: FontWeight.bold,
                                 fontStyle: FontStyle.italic,
                               ),
                         )
                       ],
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Barlow Semi Condensed',
+                            font: GoogleFonts.barlowSemiCondensed(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                             color: FlutterFlowTheme.of(context).customColor1,
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
                           ),
                     ),
                   ),

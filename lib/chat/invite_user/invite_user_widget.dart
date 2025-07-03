@@ -3,18 +3,21 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'invite_user_model.dart';
 export 'invite_user_model.dart';
 
 class InviteUserWidget extends StatefulWidget {
   const InviteUserWidget({super.key});
 
+  static String routeName = 'inviteUser';
+  static String routePath = '/inviteUser';
+
   @override
-  _InviteUserWidgetState createState() => _InviteUserWidgetState();
+  State<InviteUserWidget> createState() => _InviteUserWidgetState();
 }
 
 class _InviteUserWidgetState extends State<InviteUserWidget>
@@ -23,33 +26,34 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 400.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 400.ms,
-          begin: const Offset(0.0, 100.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => InviteUserModel());
 
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 400.0.ms,
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -67,24 +71,14 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: const Color(0xFF202021),
+        backgroundColor: Color(0xFF202021),
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).customColor1,
           automaticallyImplyLeading: false,
@@ -95,9 +89,9 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
             highlightColor: Colors.transparent,
             onTap: () async {
               context.pushNamed(
-                'HomePage',
+                HomePageWidget.routeName,
                 extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
+                  kTransitionInfoKey: TransitionInfo(
                     hasTransition: true,
                     transitionType: PageTransitionType.leftToRight,
                   ),
@@ -113,12 +107,22 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
           title: Text(
             'Invite User',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Barlow Condensed',
+                  font: GoogleFonts.barlowCondensed(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -133,7 +137,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                   Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
                     height: 70.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0xFF202021),
                     ),
                     child: StreamBuilder<List<UsersRecord>>(
@@ -156,13 +160,14 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                         List<UsersRecord> rowUsersRecordList = snapshot.data!
                             .where((u) => u.uid != currentUserUid)
                             .toList();
+
                         return Row(
                           mainAxisSize: MainAxisSize.max,
                           children: List.generate(rowUsersRecordList.length,
                               (rowIndex) {
                             final rowUsersRecord = rowUsersRecordList[rowIndex];
                             return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 12.0, 0.0),
                               child: Container(
                                 width: 50.0,
@@ -195,7 +200,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(
                     limit: 50,
@@ -218,6 +223,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                     List<UsersRecord> listViewUsersRecordList = snapshot.data!
                         .where((u) => u.uid != currentUserUid)
                         .toList();
+
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -227,7 +233,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                         final listViewUsersRecord =
                             listViewUsersRecordList[listViewIndex];
                         return Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 1.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -236,7 +242,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               context.pushNamed(
-                                'ChatPage',
+                                ChatPageWidget.routeName,
                                 queryParameters: {
                                   'chatUser': serializeParam(
                                     listViewUsersRecord,
@@ -250,18 +256,21 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                             },
                             child: Container(
                               width: double.infinity,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Color(0xFF202021),
                                 boxShadow: [
                                   BoxShadow(
                                     blurRadius: 0.0,
                                     color: Color(0xFFE0E3E7),
-                                    offset: Offset(0.0, 1.0),
+                                    offset: Offset(
+                                      0.0,
+                                      1.0,
+                                    ),
                                   )
                                 ],
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(8.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -269,15 +278,15 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                                       width: 44.0,
                                       height: 44.0,
                                       decoration: BoxDecoration(
-                                        color: const Color(0x4C4B39EF),
+                                        color: Color(0x4C4B39EF),
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: const Color(0xFF4B39EF),
+                                          color: Color(0xFF4B39EF),
                                           width: 2.0,
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(2.0),
+                                        padding: EdgeInsets.all(2.0),
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(40.0),
@@ -298,7 +307,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               listViewUsersRecord.displayName,
@@ -306,19 +315,33 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                                                       context)
                                                   .bodyLarge
                                                   .override(
-                                                    fontFamily:
-                                                        'Barlow Condensed',
+                                                    font: GoogleFonts
+                                                        .barlowCondensed(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyLarge
+                                                              .fontStyle,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryBackground,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyLarge
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 4.0, 0.0, 0.0),
                                             child: Text(
                                               listViewUsersRecord.email,
@@ -326,13 +349,27 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
+                                                    font: GoogleFonts
+                                                        .barlowSemiCondensed(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .alternate,
                                                     fontSize: 14.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -348,7 +385,7 @@ class _InviteUserWidgetState extends State<InviteUserWidget>
                                         borderRadius:
                                             BorderRadius.circular(40.0),
                                       ),
-                                      child: const Padding(
+                                      child: Padding(
                                         padding: EdgeInsets.all(4.0),
                                         child: Icon(
                                           Icons.keyboard_arrow_right_rounded,

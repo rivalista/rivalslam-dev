@@ -8,15 +8,12 @@ class FriendsSearchAddedModel
     extends FlutterFlowModel<FriendsSearchAddedWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Model for FriendsICardAdd component.
   late FriendsICardAddModel friendsICardAddModel;
   // Model for FriendsICardAccepted component.
   late FriendsICardAcceptedModel friendsICardAcceptedModel1;
   // Model for FriendsICardAccepted component.
   late FriendsICardAcceptedModel friendsICardAcceptedModel2;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -29,13 +26,8 @@ class FriendsSearchAddedModel
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     friendsICardAddModel.dispose();
     friendsICardAcceptedModel1.dispose();
     friendsICardAcceptedModel2.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

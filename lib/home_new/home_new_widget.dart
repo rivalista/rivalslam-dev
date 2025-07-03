@@ -5,17 +5,19 @@ import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_new_model.dart';
 export 'home_new_model.dart';
 
 class HomeNewWidget extends StatefulWidget {
   const HomeNewWidget({super.key});
 
+  static String routeName = 'Home_new';
+  static String routePath = '/homeNew';
+
   @override
-  _HomeNewWidgetState createState() => _HomeNewWidgetState();
+  State<HomeNewWidget> createState() => _HomeNewWidgetState();
 }
 
 class _HomeNewWidgetState extends State<HomeNewWidget>
@@ -24,39 +26,41 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'textOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.linear,
-          delay: 400.ms,
-          duration: 700.ms,
-          begin: const Offset(-400.0, 0.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'textOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 500.ms,
-          duration: 700.ms,
-          begin: const Offset(-400.0, 0.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeNewModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    animationsMap.addAll({
+      'textOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.linear,
+            delay: 400.0.ms,
+            duration: 700.0.ms,
+            begin: Offset(-400.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 500.0.ms,
+            duration: 700.0.ms,
+            begin: Offset(-400.0, 0.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -68,21 +72,11 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -94,7 +88,7 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Colors.white,
               size: 30.0,
@@ -104,27 +98,38 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
             },
           ),
           title: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
             child: Text(
               '64',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Barlow Condensed',
+                    font: GoogleFonts.barlowCondensed(
+                      fontWeight: FlutterFlowTheme.of(context)
+                          .headlineMedium
+                          .fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                    ),
                     color: Colors.white,
                     fontSize: 18.0,
+                    letterSpacing: 0.0,
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
             ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 2.0,
         ),
         body: SafeArea(
           top: true,
           child: Stack(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 100.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -146,18 +151,22 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           Opacity(
                             opacity: 0.4,
                             child: Align(
-                              alignment: const AlignmentDirectional(1.0, -1.0),
+                              alignment: AlignmentDirectional(1.0, -1.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 43.0, 0.0),
                                 child: Text(
                                   '0',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Barlow Semi Condensed',
+                                        font: GoogleFonts.barlowSemiCondensed(
+                                          fontWeight: FontWeight.w800,
+                                          fontStyle: FontStyle.italic,
+                                        ),
                                         color: Colors.white,
                                         fontSize: 250.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w800,
                                         fontStyle: FontStyle.italic,
                                       ),
@@ -181,15 +190,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                             ).image,
                           ),
                         ),
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Stack(
                           children: [
                             Opacity(
                               opacity: 0.4,
                               child: Align(
-                                alignment: const AlignmentDirectional(1.0, -1.0),
+                                alignment: AlignmentDirectional(1.0, -1.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 43.0, 0.0),
                                   child: Text(
                                     '0',
@@ -197,9 +206,13 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Barlow Semi Condensed',
+                                          font: GoogleFonts.barlowSemiCondensed(
+                                            fontWeight: FontWeight.w800,
+                                            fontStyle: FontStyle.italic,
+                                          ),
                                           color: Colors.white,
                                           fontSize: 250.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w800,
                                           fontStyle: FontStyle.italic,
                                           lineHeight: 0.8,
@@ -219,10 +232,10 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
               Opacity(
                 opacity: 0.8,
                 child: Align(
-                  alignment: const AlignmentDirectional(-1.0, -1.0),
+                  alignment: AlignmentDirectional(-1.0, -1.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(44.0, 141.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(44.0, 141.0, 0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -236,26 +249,26 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(230.0, 510.0, 18.71, 0.0),
-                  child: SizedBox(
+                      EdgeInsetsDirectional.fromSTEB(230.0, 510.0, 18.71, 0.0),
+                  child: Container(
                     width: 110.0,
                     height: 30.0,
                     child: Stack(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 69.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -266,15 +279,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 46.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -285,15 +298,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 23.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -309,16 +322,20 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, -1.0),
+                alignment: AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(53.5, 224.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(53.5, 224.0, 0.0, 0.0),
                   child: Text(
                     'YANKEES',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Barlow Condensed',
+                          font: GoogleFonts.barlowCondensed(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic,
+                          ),
                           color: Colors.white,
                           fontSize: 20.0,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.italic,
                         ),
@@ -326,19 +343,19 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, -1.0),
+                alignment: AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(18.0, 265.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(18.0, 265.0, 0.0, 0.0),
                   child: Container(
                     width: 130.2,
                     height: 130.2,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0xFF141414),
                       shape: BoxShape.circle,
                     ),
                     child: Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
+                      padding: EdgeInsetsDirectional.fromSTEB(
                           18.1, 34.72, 18.1, 35.1),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
@@ -348,9 +365,13 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Condensed',
-                                  color: const Color(0xFF69BE3C),
+                                  font: GoogleFonts.barlowCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  color: Color(0xFF69BE3C),
                                   fontSize: 22.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
                                 ),
@@ -364,10 +385,10 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
               Opacity(
                 opacity: 0.8,
                 child: Align(
-                  alignment: const AlignmentDirectional(-1.0, -1.0),
+                  alignment: AlignmentDirectional(-1.0, -1.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(44.0, 440.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(44.0, 440.0, 0.0, 0.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
@@ -381,39 +402,47 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, -1.0),
+                alignment: AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(55.0, 410.0, 0.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(55.0, 410.0, 0.0, 0.0),
                   child: Text(
                     'RED SOX',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Barlow Condensed',
+                          font: GoogleFonts.barlowCondensed(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
                           color: Colors.white,
                           fontSize: 20.0,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
                   ),
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(230.0, 120.0, 18.71, 0.0),
-                  child: SizedBox(
+                      EdgeInsetsDirectional.fromSTEB(230.0, 120.0, 18.71, 0.0),
+                  child: Container(
                     width: 110.0,
                     height: 30.0,
                     child: Stack(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Container(
                             width: 45.0,
                             height: 45.0,
                             clipBehavior: Clip.antiAlias,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: Image.asset(
@@ -423,15 +452,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 69.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -442,15 +471,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 46.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -461,15 +490,15 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 23.0, 0.0, 0.0, 0.0),
                             child: Container(
                               width: 45.0,
                               height: 45.0,
                               clipBehavior: Clip.antiAlias,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                               ),
                               child: Image.asset(
@@ -485,16 +514,20 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, -1.0),
+                alignment: AlignmentDirectional(-1.0, -1.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 600.0, 27.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(24.0, 600.0, 27.0, 0.0),
                   child: Text(
                     'START TALKING TRASH WITH YOUR BUDDIES AND MAKE A FRIENDLY SLAMBET',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Barlow Condensed',
+                          font: GoogleFonts.barlowCondensed(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.italic,
+                          ),
                           color: Colors.white,
                           fontSize: 20.0,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
                           fontStyle: FontStyle.italic,
                         ),
@@ -502,34 +535,38 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 684.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 684.0, 0.0, 0.0),
                   child: Container(
                     width: 88.0,
                     height: 88.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0xFF69BE3C),
                       shape: BoxShape.circle,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        const Icon(
+                        Icon(
                           Icons.add,
                           color: Colors.white,
                           size: 60.0,
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Text(
                             'SLAMBET',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Condensed',
-                                  color: const Color(0xFF141414),
+                                  font: GoogleFonts.barlowCondensed(
+                                    fontWeight: FontWeight.w800,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  color: Color(0xFF141414),
                                   fontSize: 15.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w800,
                                   fontStyle: FontStyle.italic,
                                 ),
@@ -541,11 +578,11 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    const Align(
+                    Align(
                       alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
                         padding:
@@ -557,7 +594,7 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                         ),
                       ),
                     ),
-                    const Align(
+                    Align(
                       alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -570,17 +607,21 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                       ),
                     ),
                     Align(
-                      alignment: const AlignmentDirectional(-1.0, -1.0),
+                      alignment: AlignmentDirectional(-1.0, -1.0),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                         child: Text(
                           '64',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
-                                    color: const Color(0xFF6E6E6E),
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                    color: Color(0xFF6E6E6E),
                                     fontSize: 18.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.italic,
                                   ),
@@ -591,27 +632,36 @@ class _HomeNewWidgetState extends State<HomeNewWidget>
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(-0.71, -0.14),
+                alignment: AlignmentDirectional(-0.71, -0.14),
                 child: FlutterFlowTimer(
-                  initialTime: _model.timerMilliseconds,
+                  initialTime: _model.timerInitialTimeMs,
                   getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
                     value,
                     hours: false,
                     milliSecond: false,
                   ),
                   controller: _model.timerController,
-                  updateStateInterval: const Duration(milliseconds: 1000),
+                  updateStateInterval: Duration(milliseconds: 1000),
                   onChanged: (value, displayTime, shouldUpdate) {
                     _model.timerMilliseconds = value;
                     _model.timerValue = displayTime;
-                    if (shouldUpdate) setState(() {});
+                    if (shouldUpdate) safeSetState(() {});
                   },
                   textAlign: TextAlign.start,
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Barlow Condensed',
-                        color: const Color(0xFFB4B4B4),
+                        font: GoogleFonts.barlowCondensed(
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineSmall
+                              .fontStyle,
+                        ),
+                        color: Color(0xFFB4B4B4),
                         fontSize: 30.05,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.w600,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineSmall
+                            .fontStyle,
                       ),
                 ),
               ),

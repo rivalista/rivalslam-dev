@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'buddies_model.dart';
 export 'buddies_model.dart';
 
@@ -9,7 +9,7 @@ class BuddiesWidget extends StatefulWidget {
   const BuddiesWidget({super.key});
 
   @override
-  _BuddiesWidgetState createState() => _BuddiesWidgetState();
+  State<BuddiesWidget> createState() => _BuddiesWidgetState();
 }
 
 class _BuddiesWidgetState extends State<BuddiesWidget> {
@@ -36,10 +36,8 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -47,14 +45,14 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: 35.0,
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -62,9 +60,23 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                           'J',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
-                                    color: const Color(0xFFB4B4B4),
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFFB4B4B4),
                                     fontSize: 12.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ],
@@ -79,16 +91,16 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
                     height: 70.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -97,7 +109,7 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                               Container(
                                 width: 200.0,
                                 height: 40.0,
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
@@ -105,7 +117,7 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                       width: 32.0,
                                       height: 32.0,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.asset(
@@ -114,16 +126,34 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           6.0, 0.0, 0.0, 0.0),
                                       child: Text(
                                         'chris88',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
-                                              color: const Color(0xFFB4B4B4),
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFFB4B4B4),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
@@ -133,8 +163,8 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                               Container(
                                 width: 100.0,
                                 height: 40.0,
-                                decoration: const BoxDecoration(),
-                                child: SizedBox(
+                                decoration: BoxDecoration(),
+                                child: Container(
                                   width: 100.0,
                                   height: 40.0,
                                   child: Stack(
@@ -146,21 +176,21 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: SizedBox(
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Container(
                                               width: 50.0,
                                               child: Stack(
                                                 children: [
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             1.0, 0.0),
                                                     child: Container(
                                                       width: 34.0,
                                                       height: 34.0,
                                                       clipBehavior:
                                                           Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Image.asset(
@@ -171,7 +201,7 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             1.21, 1.18),
                                                     child: Text(
                                                       '12',
@@ -180,12 +210,26 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                                                   context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Semi Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryBackground,
                                                                 fontSize: 20.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
                                                                 fontStyle:
                                                                     FontStyle
                                                                         .italic,
@@ -212,27 +256,27 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               18.0, 8.0, 18.0, 12.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
-                                child: SizedBox(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Container(
                                   width: 50.0,
                                   height: 20.0,
                                   child: Stack(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Container(
                                           width: 16.0,
                                           height: 16.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
@@ -243,12 +287,12 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-0.3, 0.0),
+                                            AlignmentDirectional(-0.3, 0.0),
                                         child: Container(
                                           width: 16.0,
                                           height: 16.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
@@ -259,12 +303,12 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(0.4, 0.0),
+                                            AlignmentDirectional(0.4, 0.0),
                                         child: Container(
                                           width: 16.0,
                                           height: 16.0,
                                           clipBehavior: Clip.antiAlias,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             shape: BoxShape.circle,
                                           ),
                                           child: Image.asset(
@@ -282,10 +326,24 @@ class _BuddiesWidgetState extends State<BuddiesWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Barlow Semi Condensed',
+                                      font: GoogleFonts.barlowSemiCondensed(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 12.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ],

@@ -1,4 +1,4 @@
-# RivalSlam-Development-Fred
+# RivalSlam-Development
 
 A new Flutter project.
 

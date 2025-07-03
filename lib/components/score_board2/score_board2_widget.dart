@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'score_board2_model.dart';
 export 'score_board2_model.dart';
@@ -12,7 +13,7 @@ class ScoreBoard2Widget extends StatefulWidget {
   const ScoreBoard2Widget({super.key});
 
   @override
-  _ScoreBoard2WidgetState createState() => _ScoreBoard2WidgetState();
+  State<ScoreBoard2Widget> createState() => _ScoreBoard2WidgetState();
 }
 
 class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
@@ -61,6 +62,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
           );
         }
         final containerHeadtoheadResponse = snapshot.data!;
+
         return Container(
           width: MediaQuery.sizeOf(context).width * 1.0,
           height: 80.0,
@@ -70,6 +72,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
           child: Builder(
             builder: (context) {
               final teams = functions.teams().toList();
+
               return Row(
                 mainAxisSize: MainAxisSize.max,
                 children: List.generate(teams.length, (teamsIndex) {
@@ -77,7 +80,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                   return Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      SizedBox(
+                      Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: 80.0,
                         child: Stack(
@@ -92,7 +95,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  SizedBox(
+                                  Container(
                                     width:
                                         MediaQuery.sizeOf(context).width * 0.5,
                                     height:
@@ -104,7 +107,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                               MediaQuery.sizeOf(context).width *
                                                   0.5,
                                           height: 80.0,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             color: Color(0xFFC62033),
                                           ),
                                           child: ClipRRect(
@@ -122,12 +125,14 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-0.8, 0.1),
+                                              AlignmentDirectional(-0.8, 0.1),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.network(
-                                              FFAppState().teamALogos[1],
+                                              FFAppState()
+                                                  .teamALogos
+                                                  .elementAtOrNull(1)!,
                                               width: 26.0,
                                               height: 26.0,
                                               fit: BoxFit.cover,
@@ -136,23 +141,31 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                         ),
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(-0.26, 0.09),
+                                              AlignmentDirectional(-0.26, 0.09),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 0.0, 0.0),
                                             child: Text(
-                                              FFAppState().teamAname[1],
+                                              FFAppState()
+                                                  .teamAname
+                                                  .elementAtOrNull(1)!,
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily:
-                                                        'Barlow Condensed',
+                                                    font: GoogleFonts
+                                                        .barlowCondensed(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryBackground,
                                                     fontSize: 18.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                     fontStyle: FontStyle.italic,
                                                   ),
@@ -163,12 +176,12 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, -1.0),
+                                    alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.5,
                                       height: 80.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFF132448),
                                       ),
                                       child: Row(
@@ -178,23 +191,31 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       50.0, 0.0, 0.0, 0.0),
                                               child: Text(
-                                                FFAppState().teamBname[1],
+                                                FFAppState()
+                                                    .teamBname
+                                                    .elementAtOrNull(1)!,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'Barlow Condensed',
+                                                          font: GoogleFonts
+                                                              .barlowCondensed(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle: FontStyle
+                                                                .italic,
+                                                          ),
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryBackground,
                                                           fontSize: 18.0,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           fontStyle:
@@ -205,13 +226,15 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 0.0, 0.0, 0.0),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                               child: Image.network(
-                                                FFAppState().teamBlogos[1],
+                                                FFAppState()
+                                                    .teamBlogos
+                                                    .elementAtOrNull(1)!,
                                                 width: 20.0,
                                                 height: 20.0,
                                                 fit: BoxFit.cover,
@@ -226,7 +249,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, -0.09),
+                              alignment: AlignmentDirectional(0.0, -0.09),
                               child: Container(
                                 width: 60.0,
                                 height: 60.0,
@@ -236,7 +259,7 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
                                 child: Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -249,13 +272,24 @@ class _ScoreBoard2WidgetState extends State<ScoreBoard2Widget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .customColor1,
                                               fontSize: 16.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ],

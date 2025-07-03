@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'buddies_swipe_model.dart';
 export 'buddies_swipe_model.dart';
 
@@ -9,7 +9,7 @@ class BuddiesSwipeWidget extends StatefulWidget {
   const BuddiesSwipeWidget({super.key});
 
   @override
-  _BuddiesSwipeWidgetState createState() => _BuddiesSwipeWidgetState();
+  State<BuddiesSwipeWidget> createState() => _BuddiesSwipeWidgetState();
 }
 
 class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
@@ -36,18 +36,16 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: 100.0,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Flexible(
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +53,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(20.0, 5.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -63,8 +61,22 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                           'C',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
-                                    color: const Color(0xFF6E6E6E),
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFF6E6E6E),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ],
@@ -72,7 +84,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 6.0),
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 6.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +93,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                           width: 32.0,
                           height: 32.0,
                           clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           child: Image.asset(
@@ -94,19 +106,19 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: SizedBox(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Container(
                                 width: 70.0,
                                 height: 40.0,
                                 child: Stack(
                                   children: [
                                     Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
+                                      alignment: AlignmentDirectional(1.0, 0.0),
                                       child: Container(
                                         width: 34.0,
                                         height: 34.0,
                                         clipBehavior: Clip.antiAlias,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                         ),
                                         child: Image.asset(
@@ -117,18 +129,29 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                                     ),
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(1.21, 1.48),
+                                          AlignmentDirectional(1.21, 1.48),
                                       child: Text(
                                         '32',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily:
-                                                  'Barlow Semi Condensed',
+                                              font: GoogleFonts
+                                                  .barlowSemiCondensed(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle: FontStyle.italic,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               fontSize: 20.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
                                               fontStyle: FontStyle.italic,
                                             ),
                                       ),
@@ -138,7 +161,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Icon(
                                 Icons.navigate_next_outlined,
@@ -154,7 +177,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(18.0, 0.0, 18.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -162,15 +185,29 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                           'You have 3 mutual friends',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
-                                    color: const Color(0xFF6E6E6E),
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFF6E6E6E),
                                     fontSize: 12.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ],
                     ),
                   ),
-                  const Divider(
+                  Divider(
                     thickness: 0.5,
                     color: Color(0xFF373736),
                   ),
@@ -179,7 +216,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
             ),
           ),
           Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -188,7 +225,7 @@ class _BuddiesSwipeWidgetState extends State<BuddiesSwipeWidget> {
                   child: Container(
                     width: 180.0,
                     height: 100.0,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0xFF69BE3C),
                     ),
                     child: Column(

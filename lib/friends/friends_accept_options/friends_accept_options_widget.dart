@@ -3,18 +3,20 @@ import '/components/invite_buddies/invite_buddies_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'friends_accept_options_model.dart';
 export 'friends_accept_options_model.dart';
 
 class FriendsAcceptOptionsWidget extends StatefulWidget {
   const FriendsAcceptOptionsWidget({super.key});
 
+  static String routeName = 'FriendsAcceptOptions';
+  static String routePath = '/friendsAcceptOptions';
+
   @override
-  _FriendsAcceptOptionsWidgetState createState() =>
+  State<FriendsAcceptOptionsWidget> createState() =>
       _FriendsAcceptOptionsWidgetState();
 }
 
@@ -33,7 +35,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
   }
 
   @override
@@ -45,21 +47,11 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
@@ -69,12 +61,12 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 20.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.arrow_back_sharp,
                       color: Color(0xFF6E6E6E),
                       size: 24.0,
@@ -82,9 +74,13 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                     Text(
                       'ADD BUDDIES',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Barlow Condensed',
-                            color: const Color(0xFF6E6E6E),
+                            font: GoogleFonts.barlowCondensed(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FontStyle.italic,
+                            ),
+                            color: Color(0xFF6E6E6E),
                             fontSize: 24.0,
+                            letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.italic,
                           ),
@@ -105,16 +101,33 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: const Alignment(0.0, 0),
+                      alignment: Alignment(0.0, 0),
                       child: TabBar(
-                        labelColor: const Color(0xFF6DBE44),
-                        unselectedLabelColor: const Color(0xFF6E6E6E),
-                        labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: const TextStyle(),
-                        indicatorColor: const Color(0xFF69BE3C),
+                        labelColor: Color(0xFF6DBE44),
+                        unselectedLabelColor: Color(0xFF6E6E6E),
+                        labelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  font: GoogleFonts.barlowSemiCondensed(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                        unselectedLabelStyle: TextStyle(),
+                        indicatorColor: Color(0xFF69BE3C),
                         indicatorWeight: 1.0,
-                        padding: const EdgeInsets.all(4.0),
-                        tabs: const [
+                        padding: EdgeInsets.all(4.0),
+                        tabs: [
                           Tab(
                             text: 'Pending Buddies',
                           ),
@@ -134,15 +147,15 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                         children: [
                           Container(
                             width: MediaQuery.sizeOf(context).width * 0.6,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -151,7 +164,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 20.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -159,7 +172,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                 MainAxisAlignment.center,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 8.0, 0.0, 0.0),
                                                 child: Text(
@@ -168,10 +181,15 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'Barlow Condensed',
+                                                        font: GoogleFonts
+                                                            .barlowCondensed(
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          fontStyle:
+                                                              FontStyle.italic,
+                                                        ),
                                                         color:
-                                                            const Color(0xFF6E6E6E),
+                                                            Color(0xFF6E6E6E),
                                                         fontSize: 16.0,
                                                         letterSpacing: 1.0,
                                                         fontWeight:
@@ -204,7 +222,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                       height: 32.0,
                                                       clipBehavior:
                                                           Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Image.asset(
@@ -214,7 +232,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   8.0,
                                                                   0.0,
@@ -222,18 +240,37 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                                   0.0),
                                                       child: Text(
                                                         'Chris',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Barlow Condensed',
-                                                              color: const Color(
-                                                                  0xFFB4B4B4),
-                                                              fontSize: 15.0,
-                                                              letterSpacing:
-                                                                  0.25,
-                                                            ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .barlowCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
+                                                                      0xFFB4B4B4),
+                                                                  fontSize:
+                                                                      15.0,
+                                                                  letterSpacing:
+                                                                      0.25,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ),
                                                   ],
@@ -248,10 +285,10 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                               ],
                                             ),
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 16.0, 0.0, 12.0),
                                                 child: Column(
@@ -260,22 +297,41 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                   children: [
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               -1.0, -1.0),
                                                       child: Text(
                                                         'From your contacts',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Barlow Condensed',
-                                                              color: const Color(
-                                                                  0xFF6E6E6E),
-                                                              fontSize: 11.0,
-                                                              letterSpacing:
-                                                                  0.25,
-                                                            ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .barlowCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
+                                                                      0xFF6E6E6E),
+                                                                  fontSize:
+                                                                      11.0,
+                                                                  letterSpacing:
+                                                                      0.25,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ),
                                                   ],
@@ -284,13 +340,13 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                             ),
                                           ],
                                         ),
-                                        const Divider(
+                                        Divider(
                                           thickness: 0.5,
                                           color: Color(0xFF6E6E6E),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 12.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -305,7 +361,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                     height: 32.0,
                                                     clipBehavior:
                                                         Clip.antiAlias,
-                                                    decoration: const BoxDecoration(
+                                                    decoration: BoxDecoration(
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Image.asset(
@@ -315,22 +371,41 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(8.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
                                                       'iamfury',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Barlow Condensed',
-                                                            color: const Color(
-                                                                0xFFB4B4B4),
-                                                            fontSize: 15.0,
-                                                            letterSpacing: 0.25,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .barlowCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
+                                                                    0xFFB4B4B4),
+                                                                fontSize: 15.0,
+                                                                letterSpacing:
+                                                                    0.25,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                     ),
                                                   ),
                                                 ],
@@ -345,7 +420,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                             ],
                                           ),
                                         ),
-                                        const Divider(
+                                        Divider(
                                           thickness: 0.5,
                                           color: Color(0xFF6E6E6E),
                                         ),
@@ -354,7 +429,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 30.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -365,8 +440,9 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                       Expanded(
                                         child: wrapWithModel(
                                           model: _model.inviteBuddiesModel,
-                                          updateCallback: () => setState(() {}),
-                                          child: const InviteBuddiesWidget(),
+                                          updateCallback: () =>
+                                              safeSetState(() {}),
+                                          child: InviteBuddiesWidget(),
                                         ),
                                       ),
                                     ],
@@ -376,21 +452,24 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 20.0, 0.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 8.0, 0.0, 0.0),
                                   child: Text(
                                     'DO YOU WANT TO BE BUDDIES WITH THESE PEEPS?',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Barlow Condensed',
-                                          color: const Color(0xFF6E6E6E),
+                                          font: GoogleFonts.barlowCondensed(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                          color: Color(0xFF6E6E6E),
                                           fontSize: 16.0,
                                           letterSpacing: 0.8,
                                           fontWeight: FontWeight.w600,
@@ -398,7 +477,7 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                         ),
                                   ),
                                 ),
-                                const Padding(
+                                Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 16.0, 0.0),
                                   child: Column(
@@ -415,8 +494,8 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                 ),
                                 wrapWithModel(
                                   model: _model.friendsICardInviteRequestModel1,
-                                  updateCallback: () => setState(() {}),
-                                  child: const FriendsICardInviteRequestWidget(),
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: FriendsICardInviteRequestWidget(),
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -425,11 +504,11 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                       width: MediaQuery.sizeOf(context).width *
                                           1.0,
                                       height: 65.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFF69BE3C),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 10.0, 16.0, 10.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -442,12 +521,18 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily:
-                                                        'Barlow Semi Condensed',
+                                                    font: GoogleFonts
+                                                        .barlowSemiCondensed(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryBackground,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w600,
                                                     fontStyle: FontStyle.italic,
                                                   ),
@@ -470,8 +555,8 @@ class _FriendsAcceptOptionsWidgetState extends State<FriendsAcceptOptionsWidget>
                                 ),
                                 wrapWithModel(
                                   model: _model.friendsICardInviteRequestModel2,
-                                  updateCallback: () => setState(() {}),
-                                  child: const FriendsICardInviteRequestWidget(),
+                                  updateCallback: () => safeSetState(() {}),
+                                  child: FriendsICardInviteRequestWidget(),
                                 ),
                               ],
                             ),

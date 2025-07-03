@@ -4,11 +4,12 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'fellow_filledin_model.dart';
 export 'fellow_filledin_model.dart';
@@ -16,10 +17,10 @@ export 'fellow_filledin_model.dart';
 class FellowFilledinWidget extends StatefulWidget {
   const FellowFilledinWidget({
     super.key,
-    required this.userName,
-    required this.college,
-    required this.homeTowm,
-    required this.livesIn,
+    this.userName,
+    this.college,
+    this.homeTowm,
+    this.livesIn,
   });
 
   final String? userName;
@@ -27,8 +28,11 @@ class FellowFilledinWidget extends StatefulWidget {
   final String? homeTowm;
   final String? livesIn;
 
+  static String routeName = 'FellowFilledin';
+  static String routePath = '/fellowFilledin';
+
   @override
-  _FellowFilledinWidgetState createState() => _FellowFilledinWidgetState();
+  State<FellowFilledinWidget> createState() => _FellowFilledinWidgetState();
 }
 
 class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
@@ -43,31 +47,29 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().teamNames = functions
-            .teamsList()
-            .map((e) => getJsonField(
-                  e,
-                  r'''$.FOOTBALL[:].team_name[:]''',
-                ))
-            .toList()
-            .map((e) => e.toString())
-            .toList()
-            .toList()
-            .cast<String>();
-      });
-      setState(() {
-        FFAppState().teamLogos = functions
-            .teamsList()
-            .map((e) => getJsonField(
-                  e,
-                  r'''$.FOOTBALL[:].team_logo[:]''',
-                ))
-            .toList()
-            .cast<String>()
-            .toList()
-            .cast<String>();
-      });
+      FFAppState().teamNames = functions
+          .teamsList()
+          .map((e) => getJsonField(
+                e,
+                r'''$.FOOTBALL[:].team_name[:]''',
+              ))
+          .toList()
+          .map((e) => e.toString())
+          .toList()
+          .toList()
+          .cast<String>();
+      safeSetState(() {});
+      FFAppState().teamLogos = functions
+          .teamsList()
+          .map((e) => getJsonField(
+                e,
+                r'''$.FOOTBALL[:].team_logo[:]''',
+              ))
+          .toList()
+          .cast<String>()
+          .toList()
+          .cast<String>();
+      safeSetState(() {});
     });
   }
 
@@ -80,30 +82,22 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(130.0),
+          preferredSize: Size.fromHeight(130.0),
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).customColor1,
             automaticallyImplyLeading: false,
-            actions: const [],
+            actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Stack(
                 children: [
@@ -116,17 +110,17 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 25.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -137,7 +131,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                   borderRadius: 30.0,
                                   borderWidth: 1.0,
                                   buttonSize: 50.0,
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.arrow_back_rounded,
                                     color: Colors.white,
                                     size: 30.0,
@@ -151,15 +145,19 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Barlow',
+                                        font: GoogleFonts.barlow(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle: FontStyle.italic,
+                                        ),
                                         color: Colors.white,
                                         fontSize: 24.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
                                         fontStyle: FontStyle.italic,
                                       ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 16.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -167,16 +165,35 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      context.pushNamed('OnboardingFavorite');
+                                      context.pushNamed(
+                                          OnboardingFavoriteWidget.routeName);
                                     },
                                     child: Text(
                                       'Skip',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Roboto',
+                                            font: GoogleFonts.roboto(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                             color: Colors.white,
                                             fontSize: 15.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ),
@@ -185,15 +202,29 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Step 3/5',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     fontSize: 15.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -216,21 +247,25 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'FOOTBALL',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.italic,
                                   ),
@@ -240,7 +275,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(14.0, 0.0, 14.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -271,10 +306,11 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                             }
                             List<UserLeaguesRecord>
                                 gridViewUserLeaguesRecordList = snapshot.data!;
+
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 10.0,
                                 mainAxisSpacing: 10.0,
@@ -293,7 +329,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                   decoration: BoxDecoration(
                                     color:
                                         gridViewUserLeaguesRecord.status == true
-                                            ? const Color(0xFF202021)
+                                            ? Color(0xFF202021)
                                             : FlutterFlowTheme.of(context)
                                                 .primaryText,
                                   ),
@@ -307,9 +343,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                           .update(createUserLeaguesRecordData(
                                         status: true,
                                       ));
-                                      setState(() {
-                                        FFAppState().addToLeageListCount(true);
-                                      });
+                                      FFAppState().addToLeageListCount(true);
+                                      safeSetState(() {});
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -324,8 +359,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                             Container(
                                               width: 80.0,
                                               height: 80.0,
-                                              decoration: const BoxDecoration(),
-                                              child: SizedBox(
+                                              decoration: BoxDecoration(),
+                                              child: Container(
                                                 width: 80.0,
                                                 height: 80.0,
                                                 child: Stack(
@@ -347,7 +382,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                         true)
                                                       Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.91, -0.89),
                                                         child: InkWell(
                                                           splashColor: Colors
@@ -365,11 +400,10 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                                     createUserLeaguesRecordData(
                                                               status: false,
                                                             ));
-                                                            setState(() {
-                                                              FFAppState()
-                                                                  .removeFromLeageListCount(
-                                                                      false);
-                                                            });
+                                                            FFAppState()
+                                                                .removeFromLeageListCount(
+                                                                    false);
+                                                            safeSetState(() {});
                                                           },
                                                           child: FaIcon(
                                                             FontAwesomeIcons
@@ -389,7 +423,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 6.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -400,24 +434,31 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                 gridViewUserLeaguesRecord
                                                     .teamName
                                                     .maybeHandleOverflow(
-                                                        maxChars: 14),
+                                                  maxChars: 14,
+                                                ),
                                                 maxLines: 2,
+                                                minFontSize: 12.0,
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily:
-                                                              'Barlow Condensed',
+                                                          font: GoogleFonts
+                                                              .barlowCondensed(
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontStyle: FontStyle
+                                                                .italic,
+                                                          ),
                                                           color: FlutterFlowTheme
                                                                   .of(context)
                                                               .secondaryBackground,
                                                           fontSize: 14.0,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontStyle:
                                                               FontStyle.italic,
                                                         ),
-                                                minFontSize: 12.0,
                                               ),
                                             ],
                                           ),
@@ -441,17 +482,21 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 8.0),
+                      EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(
                         'SOCCER',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FontStyle.italic,
+                              ),
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               fontSize: 16.0,
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.italic,
                             ),
@@ -461,7 +506,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(14.0, 12.0, 14.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(14.0, 12.0, 14.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -492,10 +537,11 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                             }
                             List<UserLeaguesRecord>
                                 gridViewUserLeaguesRecordList = snapshot.data!;
+
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 10.0,
                                 mainAxisSpacing: 10.0,
@@ -514,7 +560,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                   decoration: BoxDecoration(
                                     color:
                                         gridViewUserLeaguesRecord.status == true
-                                            ? const Color(0xFF202021)
+                                            ? Color(0xFF202021)
                                             : FlutterFlowTheme.of(context)
                                                 .primaryText,
                                   ),
@@ -528,9 +574,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                           .update(createUserLeaguesRecordData(
                                         status: true,
                                       ));
-                                      setState(() {
-                                        FFAppState().addToLeageListCount(true);
-                                      });
+                                      FFAppState().addToLeageListCount(true);
+                                      safeSetState(() {});
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -545,8 +590,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                             Container(
                                               width: 80.0,
                                               height: 80.0,
-                                              decoration: const BoxDecoration(),
-                                              child: SizedBox(
+                                              decoration: BoxDecoration(),
+                                              child: Container(
                                                 width: 80.0,
                                                 height: 80.0,
                                                 child: Stack(
@@ -568,7 +613,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                         true)
                                                       Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.91, -0.89),
                                                         child: InkWell(
                                                           splashColor: Colors
@@ -586,11 +631,10 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                                     createUserLeaguesRecordData(
                                                               status: false,
                                                             ));
-                                                            setState(() {
-                                                              FFAppState()
-                                                                  .removeFromLeageListCount(
-                                                                      false);
-                                                            });
+                                                            FFAppState()
+                                                                .removeFromLeageListCount(
+                                                                    false);
+                                                            safeSetState(() {});
                                                           },
                                                           child: FaIcon(
                                                             FontAwesomeIcons
@@ -610,7 +654,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 6.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
@@ -618,13 +662,13 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Container(
                                                   width: 110.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Row(
                                                     mainAxisSize:
@@ -644,16 +688,26 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                           textAlign:
                                                               TextAlign.center,
                                                           maxLines: 2,
+                                                          minFontSize: 12.0,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowCondensed(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
                                                                 fontSize: 14.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
@@ -661,7 +715,6 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                                     FontStyle
                                                                         .italic,
                                                               ),
-                                                          minFontSize: 12.0,
                                                         ),
                                                       ),
                                                     ],
@@ -689,21 +742,25 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 8.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             14.0, 0.0, 14.0, 0.0),
                         child: Text(
                           'BASKETBALL',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.italic,
                                   ),
@@ -713,7 +770,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(14.0),
+                  padding: EdgeInsets.all(14.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -744,10 +801,11 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                             }
                             List<UserLeaguesRecord>
                                 gridViewUserLeaguesRecordList = snapshot.data!;
+
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 10.0,
                                 mainAxisSpacing: 10.0,
@@ -766,7 +824,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                   decoration: BoxDecoration(
                                     color:
                                         gridViewUserLeaguesRecord.status == true
-                                            ? const Color(0xFF202021)
+                                            ? Color(0xFF202021)
                                             : FlutterFlowTheme.of(context)
                                                 .primaryText,
                                   ),
@@ -780,9 +838,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                           .update(createUserLeaguesRecordData(
                                         status: true,
                                       ));
-                                      setState(() {
-                                        FFAppState().addToLeageListCount(true);
-                                      });
+                                      FFAppState().addToLeageListCount(true);
+                                      safeSetState(() {});
                                     },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -797,8 +854,8 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                             Container(
                                               width: 80.0,
                                               height: 80.0,
-                                              decoration: const BoxDecoration(),
-                                              child: SizedBox(
+                                              decoration: BoxDecoration(),
+                                              child: Container(
                                                 width: 80.0,
                                                 height: 80.0,
                                                 child: Stack(
@@ -820,7 +877,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                         true)
                                                       Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.91, -0.89),
                                                         child: InkWell(
                                                           splashColor: Colors
@@ -838,11 +895,10 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                                     createUserLeaguesRecordData(
                                                               status: false,
                                                             ));
-                                                            setState(() {
-                                                              FFAppState()
-                                                                  .removeFromLeageListCount(
-                                                                      false);
-                                                            });
+                                                            FFAppState()
+                                                                .removeFromLeageListCount(
+                                                                    false);
+                                                            safeSetState(() {});
                                                           },
                                                           child: FaIcon(
                                                             FontAwesomeIcons
@@ -862,7 +918,7 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 6.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
@@ -870,13 +926,13 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Container(
                                                   width: 110.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: Row(
                                                     mainAxisSize:
@@ -896,15 +952,25 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                           textAlign:
                                                               TextAlign.center,
                                                           maxLines: 2,
+                                                          minFontSize: 12.0,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowCondensed(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .secondaryBackground,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
@@ -912,7 +978,6 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                                                                     FontStyle
                                                                         .italic,
                                                               ),
-                                                          minFontSize: 12.0,
                                                         ),
                                                       ),
                                                     ],
@@ -940,10 +1005,10 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                   ),
                 ),
                 Container(
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 30.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -954,19 +1019,24 @@ class _FellowFilledinWidgetState extends State<FellowFilledinWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.pushNamed('OnboardingFavorite');
+                            context
+                                .pushNamed(OnboardingFavoriteWidget.routeName);
                           },
                           child: Text(
                             'CONTINUE',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Semi Condensed',
-                                  color: FFAppState().leageListCount.isNotEmpty
+                                  font: GoogleFonts.barlowSemiCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                  color: FFAppState().leageListCount.length > 0
                                       ? FlutterFlowTheme.of(context)
                                           .customColor1
-                                      : const Color(0xFF395E25),
+                                      : Color(0xFF395E25),
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
                                 ),

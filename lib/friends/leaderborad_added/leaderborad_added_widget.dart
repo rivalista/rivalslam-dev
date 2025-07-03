@@ -6,17 +6,19 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'leaderborad_added_model.dart';
 export 'leaderborad_added_model.dart';
 
 class LeaderboradAddedWidget extends StatefulWidget {
   const LeaderboradAddedWidget({super.key});
 
+  static String routeName = 'LeaderboradAdded';
+  static String routePath = '/leaderboradAdded';
+
   @override
-  _LeaderboradAddedWidgetState createState() => _LeaderboradAddedWidgetState();
+  State<LeaderboradAddedWidget> createState() => _LeaderboradAddedWidgetState();
 }
 
 class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
@@ -34,7 +36,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
   }
 
   @override
@@ -46,21 +48,11 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -84,7 +76,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                 Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 0.15,
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -96,7 +88,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                           Container(
                             width: 100.0,
                             height: 60.0,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,7 +97,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                   width: 32.0,
                                   height: 32.0,
                                   clipBehavior: Clip.antiAlias,
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
                                   child: Image.asset(
@@ -117,7 +109,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                   width: 40.0,
                                   height: 40.0,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF256A10),
+                                    color: Color(0xFF256A10),
                                     borderRadius: BorderRadius.circular(4.0),
                                   ),
                                   child: Row(
@@ -141,12 +133,12 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 6.0, 0.0),
                             child: Container(
                               width: 100.0,
                               height: 60.0,
-                              decoration: const BoxDecoration(),
+                              decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment:
@@ -154,7 +146,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 0.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -193,8 +185,12 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .titleMedium
                                     .override(
-                                      fontFamily: 'Barlow Semi Condensed',
+                                      font: GoogleFonts.barlowSemiCondensed(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.italic,
+                                      ),
                                       fontSize: 42.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.italic,
                                     ),
@@ -217,26 +213,40 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                 Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 0.75,
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Column(
                     children: [
                       Align(
-                        alignment: const Alignment(0.0, 0),
+                        alignment: Alignment(0.0, 0),
                         child: TabBar(
                           labelColor: Colors.white,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).primaryBackground,
                           labelStyle:
                               FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
                                   ),
-                          unselectedLabelStyle: const TextStyle(),
+                          unselectedLabelStyle: TextStyle(),
                           indicatorColor:
                               FlutterFlowTheme.of(context).primaryBackground,
                           indicatorWeight: 2.0,
-                          padding: const EdgeInsets.all(4.0),
-                          tabs: const [
+                          padding: EdgeInsets.all(4.0),
+                          tabs: [
                             Tab(
                               text: 'My Buddies',
                             ),
@@ -257,11 +267,11 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                             Container(
                               width: 100.0,
                               height: 100.0,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Color(0xFF141414),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 20.0),
                                 child: SingleChildScrollView(
                                   child: Column(
@@ -269,22 +279,25 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                     children: [
                                       wrapWithModel(
                                         model: _model.buddiesModel1,
-                                        updateCallback: () => setState(() {}),
-                                        child: const BuddiesWidget(),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: BuddiesWidget(),
                                       ),
-                                      const Divider(
+                                      Divider(
                                         thickness: 1.0,
                                         color: Color(0xFF373736),
                                       ),
                                       wrapWithModel(
                                         model: _model.buddiesModel2,
-                                        updateCallback: () => setState(() {}),
-                                        child: const BuddiesWidget(),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: BuddiesWidget(),
                                       ),
                                       wrapWithModel(
                                         model: _model.inviteBuddiesModel,
-                                        updateCallback: () => setState(() {}),
-                                        child: const InviteBuddiesWidget(),
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: InviteBuddiesWidget(),
                                       ),
                                     ],
                                   ),
@@ -294,18 +307,18 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                             Container(
                               width: 100.0,
                               height: 100.0,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 color: Color(0xFF141414),
                               ),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 18.0, 0.0, 0.0),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             60.0, 0.0, 60.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -313,7 +326,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                             Container(
                                               width: 159.0,
                                               height: 27.0,
-                                              decoration: const BoxDecoration(
+                                              decoration: BoxDecoration(
                                                 color: Color(0xFF1D1D1D),
                                                 borderRadius: BorderRadius.only(
                                                   bottomLeft:
@@ -327,7 +340,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         11.0, 0.0, 4.0, 0.0),
                                                 child: Row(
@@ -336,24 +349,43 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   children: [
                                                     Text(
                                                       'Only my buddies',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
-                                                                0xFF707070),
-                                                            fontSize: 15.0,
-                                                            letterSpacing: 0.25,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
+                                                                    0xFF707070),
+                                                                fontSize: 15.0,
+                                                                letterSpacing:
+                                                                    0.25,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                     ),
                                                     Container(
                                                       width: 19.0,
                                                       height: 19.0,
                                                       clipBehavior:
                                                           Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Image.asset(
@@ -362,14 +394,14 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(width: 9.0)),
+                                                      SizedBox(width: 9.0)),
                                                 ),
                                               ),
                                             ),
                                             Container(
                                               width: 88.0,
                                               height: 27.0,
-                                              decoration: const BoxDecoration(
+                                              decoration: BoxDecoration(
                                                 color: Color(0xFF213F12),
                                                 borderRadius: BorderRadius.only(
                                                   bottomLeft:
@@ -383,7 +415,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                 ),
                                               ),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         11.0, 0.0, 4.0, 0.0),
                                                 child: Row(
@@ -392,24 +424,43 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   children: [
                                                     Text(
                                                       'Global',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
-                                                                0xFF69BE3C),
-                                                            fontSize: 15.0,
-                                                            letterSpacing: 0.25,
-                                                          ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
+                                                                    0xFF69BE3C),
+                                                                fontSize: 15.0,
+                                                                letterSpacing:
+                                                                    0.25,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
                                                     ),
                                                     Container(
                                                       width: 19.0,
                                                       height: 19.0,
                                                       clipBehavior:
                                                           Clip.antiAlias,
-                                                      decoration: const BoxDecoration(
+                                                      decoration: BoxDecoration(
                                                         shape: BoxShape.circle,
                                                       ),
                                                       child: Image.asset(
@@ -418,26 +469,26 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(width: 9.0)),
+                                                      SizedBox(width: 9.0)),
                                                 ),
                                               ),
                                             ),
-                                          ].divide(const SizedBox(width: 8.0)),
+                                          ].divide(SizedBox(width: 8.0)),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 16.0, 0.0, 0.0),
                                         child: Container(
                                           width: double.infinity,
                                           height: 321.0,
-                                          decoration: const BoxDecoration(
+                                          decoration: BoxDecoration(
                                             color: Color(0x413C3C3C),
                                           ),
                                           child: Stack(
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         7.0, 127.0, 7.0, 0.0),
                                                 child: Row(
@@ -455,11 +506,19 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic,
+                                                            ),
+                                                            color: Color(
                                                                 0x0DFFFFFF),
                                                             fontSize: 170.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w800,
                                                             fontStyle: FontStyle
@@ -472,11 +531,19 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic,
+                                                            ),
+                                                            color: Color(
                                                                 0x0DFFFFFF),
                                                             fontSize: 170.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w800,
                                                             fontStyle: FontStyle
@@ -489,11 +556,19 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w800,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic,
+                                                            ),
+                                                            color: Color(
                                                                 0x0DFFFFFF),
                                                             fontSize: 170.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w800,
                                                             fontStyle: FontStyle
@@ -501,11 +576,11 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                           ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(width: 61.0)),
+                                                      SizedBox(width: 61.0)),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         38.0, 115.0, 0.0, 0.0),
                                                 child: Column(
@@ -514,7 +589,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -526,11 +601,20 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                 .of(context)
                                                             .bodyMedium
                                                             .override(
-                                                              fontFamily:
-                                                                  'Barlow Semi Condensed',
-                                                              color: const Color(
+                                                              font: GoogleFonts
+                                                                  .barlowSemiCondensed(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .italic,
+                                                              ),
+                                                              color: Color(
                                                                   0xFFB4B4B4),
                                                               fontSize: 20.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
@@ -542,7 +626,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -554,7 +638,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                         clipBehavior:
                                                             Clip.antiAlias,
                                                         decoration:
-                                                            const BoxDecoration(
+                                                            BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                         ),
@@ -570,10 +654,18 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic,
+                                                            ),
                                                             color: Colors.white,
                                                             fontSize: 15.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                             fontStyle: FontStyle
@@ -587,24 +679,39 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                 .of(context)
                                                             .titleSmall
                                                             .override(
-                                                              fontFamily:
-                                                                  'Barlow Condensed',
+                                                              font: GoogleFonts
+                                                                  .barlowCondensed(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 24.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .normal,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
                                                             ),
                                                       ),
                                                       showBadge: true,
                                                       shape: badges
                                                           .BadgeShape.circle,
                                                       badgeColor:
-                                                          const Color(0x00FFFFFF),
+                                                          Color(0x00FFFFFF),
                                                       elevation: 4.0,
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   20.0,
@@ -630,11 +737,11 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(height: 5.0)),
+                                                      SizedBox(height: 5.0)),
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         118.0, 49.0, 0.0, 0.0),
                                                 child: Stack(
@@ -651,14 +758,14 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                             shape:
                                                                 BoxShape.circle,
                                                             border: Border.all(
-                                                              color: const Color(
+                                                              color: Color(
                                                                   0xFF69BE3C),
                                                               width: 3.0,
                                                             ),
                                                           ),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         4.0,
@@ -670,7 +777,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               clipBehavior: Clip
                                                                   .antiAlias,
                                                               decoration:
-                                                                  const BoxDecoration(
+                                                                  BoxDecoration(
                                                                 shape: BoxShape
                                                                     .circle,
                                                               ),
@@ -689,11 +796,20 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Semi Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                ),
                                                                 color: Colors
                                                                     .white,
                                                                 fontSize: 20.0,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w600,
@@ -709,15 +825,29 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                     .of(context)
                                                                 .titleSmall
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Barlow Condensed',
+                                                                  font: GoogleFonts
+                                                                      .barlowCondensed(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .fontStyle,
+                                                                  ),
                                                                   color: Colors
                                                                       .white,
                                                                   fontSize:
                                                                       24.0,
+                                                                  letterSpacing:
+                                                                      0.0,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
                                                                 ),
                                                           ),
                                                           showBadge: true,
@@ -725,10 +855,10 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .BadgeShape
                                                               .circle,
                                                           badgeColor:
-                                                              const Color(0x00FFFFFF),
+                                                              Color(0x00FFFFFF),
                                                           elevation: 4.0,
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       20.0,
@@ -754,16 +884,16 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                             ),
                                                           ),
                                                         ),
-                                                      ].divide(const SizedBox(
+                                                      ].divide(SizedBox(
                                                           height: 5.0)),
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               -1.0, -1.0),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     90.0,
                                                                     0.0,
@@ -773,7 +903,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                           width: 64.0,
                                                           height: 64.0,
                                                           decoration:
-                                                              const BoxDecoration(
+                                                              BoxDecoration(
                                                             color: Color(
                                                                 0xFF141414),
                                                             shape:
@@ -810,7 +940,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         269.0, 115.0, 0.0, 0.0),
                                                 child: Column(
@@ -819,7 +949,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -831,11 +961,20 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                 .of(context)
                                                             .bodyMedium
                                                             .override(
-                                                              fontFamily:
-                                                                  'Barlow Semi Condensed',
-                                                              color: const Color(
+                                                              font: GoogleFonts
+                                                                  .barlowSemiCondensed(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle:
+                                                                    FontStyle
+                                                                        .italic,
+                                                              ),
+                                                              color: Color(
                                                                   0xFFB4B4B4),
                                                               fontSize: 20.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
@@ -847,7 +986,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -859,7 +998,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                         clipBehavior:
                                                             Clip.antiAlias,
                                                         decoration:
-                                                            const BoxDecoration(
+                                                            BoxDecoration(
                                                           shape:
                                                               BoxShape.circle,
                                                         ),
@@ -875,10 +1014,18 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FontStyle
+                                                                      .italic,
+                                                            ),
                                                             color: Colors.white,
                                                             fontSize: 15.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w600,
                                                             fontStyle: FontStyle
@@ -892,24 +1039,39 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                 .of(context)
                                                             .titleSmall
                                                             .override(
-                                                              fontFamily:
-                                                                  'Barlow Condensed',
+                                                              font: GoogleFonts
+                                                                  .barlowCondensed(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
                                                               color:
                                                                   Colors.white,
                                                               fontSize: 24.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .normal,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
                                                             ),
                                                       ),
                                                       showBadge: true,
                                                       shape: badges
                                                           .BadgeShape.circle,
                                                       badgeColor:
-                                                          const Color(0x00FFFFFF),
+                                                          Color(0x00FFFFFF),
                                                       elevation: 4.0,
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   20.0,
@@ -935,7 +1097,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(height: 5.0)),
+                                                      SizedBox(height: 5.0)),
                                                 ),
                                               ),
                                             ],
@@ -943,7 +1105,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                         ),
                                       ),
                                       Container(
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -956,12 +1118,12 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           1.0,
                                                   height: 65.0,
-                                                  decoration: const BoxDecoration(
+                                                  decoration: BoxDecoration(
                                                     color: Color(0xFF69BE3C),
                                                   ),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(
                                                                 16.0,
                                                                 10.0,
@@ -980,12 +1142,26 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Barlow Semi Condensed',
+                                                                font: GoogleFonts
+                                                                    .barlowSemiCondensed(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle:
+                                                                      FontStyle
+                                                                          .italic,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryBackground,
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
                                                                 fontStyle:
                                                                     FontStyle
                                                                         .italic,
@@ -1012,8 +1188,8 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   model:
                                                       _model.buddiesListModel1,
                                                   updateCallback: () =>
-                                                      setState(() {}),
-                                                  child: const BuddiesListWidget(),
+                                                      safeSetState(() {}),
+                                                  child: BuddiesListWidget(),
                                                 ),
                                               ],
                                             ),
@@ -1027,8 +1203,8 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   model:
                                                       _model.buddiesInviteModel,
                                                   updateCallback: () =>
-                                                      setState(() {}),
-                                                  child: const BuddiesInviteWidget(),
+                                                      safeSetState(() {}),
+                                                  child: BuddiesInviteWidget(),
                                                 ),
                                               ],
                                             ),
@@ -1039,8 +1215,8 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                   model:
                                                       _model.buddiesListModel2,
                                                   updateCallback: () =>
-                                                      setState(() {}),
-                                                  child: const BuddiesListWidget(),
+                                                      safeSetState(() {}),
+                                                  child: BuddiesListWidget(),
                                                 ),
                                               ],
                                             ),
@@ -1061,31 +1237,31 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                 Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 0.1,
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
                     height: MediaQuery.sizeOf(context).height * 0.08,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       color: Color(0xFF141414),
                     ),
                     child: Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 90.0,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         color: Color(0xFF141414),
                       ),
                       child: Align(
-                        alignment: const AlignmentDirectional(0.0, 1.0),
-                        child: SizedBox(
+                        alignment: AlignmentDirectional(0.0, 1.0),
+                        child: Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: MediaQuery.sizeOf(context).height * 1.0,
                           child: Stack(
-                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            alignment: AlignmentDirectional(0.0, 1.0),
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.0, -1.0),
+                                alignment: AlignmentDirectional(0.0, -1.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 2.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1096,13 +1272,13 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                       Expanded(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: Container(
                                             width: MediaQuery.sizeOf(context)
                                                     .width *
                                                 1.0,
                                             height: 55.0,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               color: Color(0xFF141414),
                                             ),
                                             child: Row(
@@ -1116,7 +1292,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           0.18,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1137,16 +1313,37 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                       Text(
                                                         'Home',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Barlow Semi Condensed',
-                                                              color: const Color(
-                                                                  0xFF6E6E6E),
-                                                              fontSize: 10.0,
-                                                            ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
+                                                                      0xFF6E6E6E),
+                                                                  fontSize:
+                                                                      10.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -1157,7 +1354,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           0.18,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1178,16 +1375,37 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                       ),
                                                       Text(
                                                         'SlamBets',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Barlow Semi Condensed',
-                                                              color: const Color(
-                                                                  0x5CB7AEF2),
-                                                              fontSize: 10.0,
-                                                            ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
+                                                                      0x5CB7AEF2),
+                                                                  fontSize:
+                                                                      10.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
                                                     ],
                                                   ),
@@ -1198,7 +1416,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           0.18,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                 ),
                                                 Container(
                                                   width:
@@ -1206,7 +1424,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           0.18,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1232,13 +1450,32 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                     context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Barlow Semi Condensed',
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize:
                                                                       10.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                       ),
                                                     ],
@@ -1250,7 +1487,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                               .width *
                                                           0.18,
                                                   height: 100.0,
-                                                  decoration: const BoxDecoration(),
+                                                  decoration: BoxDecoration(),
                                                   child: Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
@@ -1276,13 +1513,32 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                                                     context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Barlow Semi Condensed',
+                                                                  font: GoogleFonts
+                                                                      .barlowSemiCondensed(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize:
                                                                       10.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                       ),
                                                     ],
@@ -1298,21 +1554,21 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(-0.01, 0.26),
+                                alignment: AlignmentDirectional(-0.01, 0.26),
                                 child: Container(
                                   width: 56.0,
                                   height: 56.0,
                                   decoration: BoxDecoration(
-                                    color: const Color(0xFF69BE3C),
+                                    color: Color(0xFF69BE3C),
                                     borderRadius: BorderRadius.circular(35.0),
                                   ),
-                                  alignment: const AlignmentDirectional(0.0, -1.0),
+                                  alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Align(
-                                    alignment: const AlignmentDirectional(0.0, -1.0),
+                                    alignment: AlignmentDirectional(0.0, -1.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        SizedBox(
+                                        Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.55,
@@ -1320,7 +1576,7 @@ class _LeaderboradAddedWidgetState extends State<LeaderboradAddedWidget>
                                           child: Stack(
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.06, 0.0),
                                                 child: Icon(
                                                   Icons.add,

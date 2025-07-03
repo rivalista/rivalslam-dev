@@ -4,8 +4,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'onboarding_favorite_model.dart';
 export 'onboarding_favorite_model.dart';
@@ -13,8 +14,11 @@ export 'onboarding_favorite_model.dart';
 class OnboardingFavoriteWidget extends StatefulWidget {
   const OnboardingFavoriteWidget({super.key});
 
+  static String routeName = 'OnboardingFavorite';
+  static String routePath = '/onboardingFavorite';
+
   @override
-  _OnboardingFavoriteWidgetState createState() =>
+  State<OnboardingFavoriteWidget> createState() =>
       _OnboardingFavoriteWidgetState();
 }
 
@@ -41,35 +45,27 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(100.0),
+          preferredSize: Size.fromHeight(100.0),
           child: AppBar(
-            backgroundColor: const Color(0xFF40861C),
+            backgroundColor: Color(0xFF40861C),
             automaticallyImplyLeading: false,
-            actions: const [],
+            actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Stack(
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +80,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                               borderRadius: 30.0,
                               borderWidth: 1.0,
                               buttonSize: 50.0,
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.arrow_back_rounded,
                                 color: Colors.white,
                                 size: 30.0,
@@ -98,15 +94,19 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Barlow',
+                                    font: GoogleFonts.barlow(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
+                                    ),
                                     color: Colors.white,
                                     fontSize: 25.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
                                     fontStyle: FontStyle.italic,
                                   ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 16.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
@@ -115,9 +115,9 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   context.pushNamed(
-                                    'InviteFriendA',
+                                    InviteFriendBWidget.routeName,
                                     extra: <String, dynamic>{
-                                      kTransitionInfoKey: const TransitionInfo(
+                                      kTransitionInfoKey: TransitionInfo(
                                         hasTransition: true,
                                         transitionType:
                                             PageTransitionType.bottomToTop,
@@ -131,10 +131,20 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Roboto',
+                                        font: GoogleFonts.roboto(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         color: Colors.white,
                                         fontSize: 15.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
@@ -142,15 +152,29 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                           ],
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Text(
                             'Step 4/5',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Semi Condensed',
+                                  font: GoogleFonts.barlowSemiCondensed(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: Colors.white,
                                   fontSize: 15.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -171,17 +195,52 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(14.0, 16.0, 14.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(14.0, 16.0, 14.0, 0.0),
                 child: TextFormField(
                   controller: _model.textController,
                   focusNode: _model.textFieldFocusNode,
+                  autofocus: false,
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Search teams and players',
-                    labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                    hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
+                            ),
+                    hintStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
+                            ),
                     enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Color(0x00000000),
                         width: 2.0,
                       ),
@@ -209,15 +268,26 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     filled: true,
-                    fillColor: const Color(0xFF141414),
-                    prefixIcon: const Icon(
+                    fillColor: Color(0xFF141414),
+                    prefixIcon: Icon(
                       Icons.search,
                       color: Color(0xFF6E6E6E),
                     ),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Barlow Semi Condensed',
+                        font: GoogleFonts.barlowSemiCondensed(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
                         color: Colors.white,
+                        letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                   maxLines: null,
                   validator:
@@ -225,11 +295,11 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 1.0,
                   height: MediaQuery.sizeOf(context).height * 0.6,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Color(0xFF141414),
                   ),
                   child: SingleChildScrollView(
@@ -237,7 +307,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
@@ -246,7 +316,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   14.0, 0.0, 14.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -256,9 +326,27 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Barlow Semi Condensed',
+                                          font: GoogleFonts.barlowSemiCondensed(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .secondaryBackground,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ],
@@ -287,6 +375,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                             }
                             List<UserTeamFavRecord>
                                 listViewUserTeamFavRecordList = snapshot.data!;
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
@@ -302,12 +391,12 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                   decoration: BoxDecoration(
                                     color:
                                         listViewUserTeamFavRecord.status == true
-                                            ? const Color(0xFF202021)
+                                            ? Color(0xFF202021)
                                             : FlutterFlowTheme.of(context)
                                                 .primaryText,
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -316,7 +405,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -340,7 +429,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(8.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -350,13 +439,28 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Barlow Semi Condensed',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .barlowSemiCondensed(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: Color(
                                                                 0xFFB4B4B4),
                                                             fontSize: 16.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w500,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                           ),
                                                     ),
                                                   ),
@@ -382,11 +486,10 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                                                 createUserTeamFavRecordData(
                                                           status: true,
                                                         ));
-                                                        setState(() {
-                                                          FFAppState()
-                                                              .addToFavListCount(
-                                                                  true);
-                                                        });
+                                                        FFAppState()
+                                                            .addToFavListCount(
+                                                                true);
+                                                        safeSetState(() {});
                                                       },
                                                       child: Icon(
                                                         Icons.thumb_up,
@@ -396,7 +499,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                                             ? FlutterFlowTheme
                                                                     .of(context)
                                                                 .customColor1
-                                                            : const Color(0xFF8B8D8E),
+                                                            : Color(0xFF8B8D8E),
                                                         size: 24.0,
                                                       ),
                                                     ),
@@ -422,13 +525,12 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                                                   createUserTeamFavRecordData(
                                                             status: false,
                                                           ));
-                                                          setState(() {
-                                                            FFAppState()
-                                                                .addToFavListCount(
-                                                                    false);
-                                                          });
+                                                          FFAppState()
+                                                              .addToFavListCount(
+                                                                  false);
+                                                          safeSetState(() {});
                                                         },
-                                                        child: const Icon(
+                                                        child: Icon(
                                                           Icons.thumb_up,
                                                           color:
                                                               Color(0xFF62E91B),
@@ -466,9 +568,9 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                 highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(
-                    'OnboardingRivals',
+                    OnboardingRivalsWidget.routeName,
                     extra: <String, dynamic>{
-                      kTransitionInfoKey: const TransitionInfo(
+                      kTransitionInfoKey: TransitionInfo(
                         hasTransition: true,
                         transitionType: PageTransitionType.bottomToTop,
                         duration: Duration(milliseconds: 200),
@@ -487,7 +589,7 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                     Opacity(
                       opacity: 0.5,
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 20.0, 0.0, 20.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
@@ -496,9 +598,9 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             context.pushNamed(
-                              'OnboardingRivals',
+                              InviteFriendBWidget.routeName,
                               extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
+                                kTransitionInfoKey: TransitionInfo(
                                   hasTransition: true,
                                   transitionType:
                                       PageTransitionType.bottomToTop,
@@ -506,24 +608,24 @@ class _OnboardingFavoriteWidgetState extends State<OnboardingFavoriteWidget> {
                                 ),
                               },
                             );
-
-                            await actions.userTeamRivals(
-                              currentUserUid,
-                            );
                           },
                           child: Text(
                             'CONTINUE',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Condensed',
+                                  font: GoogleFonts.barlowCondensed(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                   color: valueOrDefault<Color>(
-                                    FFAppState().favListCount.isNotEmpty
-                                        ? const Color(0xFF62E91B)
-                                        : const Color(0xFF395E25),
-                                    const Color(0xFF395E25),
+                                    FFAppState().favListCount.length > 0
+                                        ? Color(0xFF62E91B)
+                                        : Color(0xFF395E25),
+                                    Color(0xFF395E25),
                                   ),
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
                                 ),

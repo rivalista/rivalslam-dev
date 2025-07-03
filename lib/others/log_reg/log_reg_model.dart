@@ -1,46 +1,47 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'log_reg_widget.dart' show LogRegWidget;
 import 'package:flutter/material.dart';
 
 class LogRegModel extends FlutterFlowModel<LogRegWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // State field(s) for EmailLog widget.
   FocusNode? emailLogFocusNode;
-  TextEditingController? emailLogController;
-  String? Function(BuildContext, String?)? emailLogControllerValidator;
+  TextEditingController? emailLogTextController;
+  String? Function(BuildContext, String?)? emailLogTextControllerValidator;
   // State field(s) for PasswordLog widget.
   FocusNode? passwordLogFocusNode;
-  TextEditingController? passwordLogController;
+  TextEditingController? passwordLogTextController;
   late bool passwordLogVisibility;
-  String? Function(BuildContext, String?)? passwordLogControllerValidator;
+  String? Function(BuildContext, String?)? passwordLogTextControllerValidator;
   // State field(s) for EmailReg widget.
   FocusNode? emailRegFocusNode;
-  TextEditingController? emailRegController;
-  String? Function(BuildContext, String?)? emailRegControllerValidator;
+  TextEditingController? emailRegTextController;
+  String? Function(BuildContext, String?)? emailRegTextControllerValidator;
   // State field(s) for PasswordReg widget.
   FocusNode? passwordRegFocusNode;
-  TextEditingController? passwordRegController;
+  TextEditingController? passwordRegTextController;
   late bool passwordRegVisibility;
-  String? Function(BuildContext, String?)? passwordRegControllerValidator;
+  String? Function(BuildContext, String?)? passwordRegTextControllerValidator;
   // State field(s) for PasswordRegCheck widget.
   FocusNode? passwordRegCheckFocusNode;
-  TextEditingController? passwordRegCheckController;
+  TextEditingController? passwordRegCheckTextController;
   late bool passwordRegCheckVisibility;
-  String? Function(BuildContext, String?)? passwordRegCheckControllerValidator;
+  String? Function(BuildContext, String?)?
+      passwordRegCheckTextControllerValidator;
   // Stores action output result for [Custom Action - userLeagueTeam] action in Button widget.
   String? leagueSuccess;
   // Stores action output result for [Custom Action - userTeamFav] action in Button widget.
   String? favSuccess;
-
-  /// Initialization and disposal methods.
 
   @override
   void initState(BuildContext context) {
@@ -51,25 +52,20 @@ class LogRegModel extends FlutterFlowModel<LogRegWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     emailLogFocusNode?.dispose();
-    emailLogController?.dispose();
+    emailLogTextController?.dispose();
 
     passwordLogFocusNode?.dispose();
-    passwordLogController?.dispose();
+    passwordLogTextController?.dispose();
 
     emailRegFocusNode?.dispose();
-    emailRegController?.dispose();
+    emailRegTextController?.dispose();
 
     passwordRegFocusNode?.dispose();
-    passwordRegController?.dispose();
+    passwordRegTextController?.dispose();
 
     passwordRegCheckFocusNode?.dispose();
-    passwordRegCheckController?.dispose();
+    passwordRegCheckTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

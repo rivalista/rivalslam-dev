@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'invite_msg_prompt_model.dart';
 export 'invite_msg_prompt_model.dart';
 
@@ -9,7 +9,7 @@ class InviteMsgPromptWidget extends StatefulWidget {
   const InviteMsgPromptWidget({super.key});
 
   @override
-  _InviteMsgPromptWidgetState createState() => _InviteMsgPromptWidgetState();
+  State<InviteMsgPromptWidget> createState() => _InviteMsgPromptWidgetState();
 }
 
 class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
@@ -36,8 +36,6 @@ class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: 90.0,
@@ -45,7 +43,7 @@ class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
         color: FlutterFlowTheme.of(context).customColor1,
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +54,7 @@ class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 4.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -76,27 +74,45 @@ class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
                       Text(
                         'user_name ',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               fontSize: 16.0,
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                       Text(
                         'IS INVITED TO YOUR FRIENDS CIRCLE.',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Barlow Semi Condensed',
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                               fontSize: 16.0,
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,11 +121,20 @@ class _InviteMsgPromptWidgetState extends State<InviteMsgPromptWidget> {
                           'STAY TUNED FOR THEIR ANSWER.',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ],

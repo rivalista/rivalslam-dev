@@ -1,14 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 
 import '../base_auth_user_provider.dart';
 
 export '../base_auth_user_provider.dart';
 
-class RivalSlamDevelopmentFredFirebaseUser extends BaseAuthUser {
-  RivalSlamDevelopmentFredFirebaseUser(this.user);
+class RivalSlamDevelopmentFirebaseUser extends BaseAuthUser {
+  RivalSlamDevelopmentFirebaseUser(this.user);
   User? user;
-  @override
   bool get loggedIn => user != null;
 
   @override
@@ -30,6 +31,11 @@ class RivalSlamDevelopmentFredFirebaseUser extends BaseAuthUser {
     } catch (_) {
       await user?.verifyBeforeUpdateEmail(email);
     }
+  }
+
+  @override
+  Future? updatePassword(String newPassword) async {
+    await user?.updatePassword(newPassword);
   }
 
   @override
@@ -55,10 +61,10 @@ class RivalSlamDevelopmentFredFirebaseUser extends BaseAuthUser {
   static BaseAuthUser fromUserCredential(UserCredential userCredential) =>
       fromFirebaseUser(userCredential.user);
   static BaseAuthUser fromFirebaseUser(User? user) =>
-      RivalSlamDevelopmentFredFirebaseUser(user);
+      RivalSlamDevelopmentFirebaseUser(user);
 }
 
-Stream<BaseAuthUser> rivalSlamDevelopmentFredFirebaseUserStream() =>
+Stream<BaseAuthUser> rivalSlamDevelopmentFirebaseUserStream() =>
     FirebaseAuth.instance
         .authStateChanges()
         .debounce((user) => user == null && !loggedIn
@@ -66,7 +72,10 @@ Stream<BaseAuthUser> rivalSlamDevelopmentFredFirebaseUserStream() =>
             : Stream.value(user))
         .map<BaseAuthUser>(
       (user) {
-        currentUser = RivalSlamDevelopmentFredFirebaseUser(user);
+        currentUser = RivalSlamDevelopmentFirebaseUser(user);
+        if (!kIsWeb) {
+          FirebaseCrashlytics.instance.setUserIdentifier(user?.uid ?? '');
+        }
         return currentUser!;
       },
     );

@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
 import 'index.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 
 class UserTeamRivalsRecord extends FirestoreRecord {
   UserTeamRivalsRecord._(
-    super.reference,
-    super.data,
-  ) {
+    DocumentReference reference,
+    Map<String, dynamic> data,
+  ) : super(reference, data) {
     _initializeFields();
   }
 
@@ -43,8 +43,8 @@ class UserTeamRivalsRecord extends FirestoreRecord {
           ? parent.collection('user_team_rivals')
           : FirebaseFirestore.instance.collectionGroup('user_team_rivals');
 
-  static DocumentReference createDoc(DocumentReference parent) =>
-      parent.collection('user_team_rivals').doc();
+  static DocumentReference createDoc(DocumentReference parent, {String? id}) =>
+      parent.collection('user_team_rivals').doc(id);
 
   static Stream<UserTeamRivalsRecord> getDocument(DocumentReference ref) =>
       ref.snapshots().map((s) => UserTeamRivalsRecord.fromSnapshot(s));

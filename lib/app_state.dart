@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 import 'flutter_flow/flutter_flow_util.dart';
+import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -77,26 +79,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamAname(String value) {
-    _teamAname.add(value);
+    teamAname.add(value);
   }
 
   void removeFromTeamAname(String value) {
-    _teamAname.remove(value);
+    teamAname.remove(value);
   }
 
   void removeAtIndexFromTeamAname(int index) {
-    _teamAname.removeAt(index);
+    teamAname.removeAt(index);
   }
 
   void updateTeamAnameAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamAname[index] = updateFn(_teamAname[index]);
+    teamAname[index] = updateFn(_teamAname[index]);
   }
 
   void insertAtIndexInTeamAname(int index, String value) {
-    _teamAname.insert(index, value);
+    teamAname.insert(index, value);
   }
 
   List<String> _teamBname = [];
@@ -106,26 +108,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamBname(String value) {
-    _teamBname.add(value);
+    teamBname.add(value);
   }
 
   void removeFromTeamBname(String value) {
-    _teamBname.remove(value);
+    teamBname.remove(value);
   }
 
   void removeAtIndexFromTeamBname(int index) {
-    _teamBname.removeAt(index);
+    teamBname.removeAt(index);
   }
 
   void updateTeamBnameAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamBname[index] = updateFn(_teamBname[index]);
+    teamBname[index] = updateFn(_teamBname[index]);
   }
 
   void insertAtIndexInTeamBname(int index, String value) {
-    _teamBname.insert(index, value);
+    teamBname.insert(index, value);
   }
 
   List<String> _teamALogos = [];
@@ -135,26 +137,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamALogos(String value) {
-    _teamALogos.add(value);
+    teamALogos.add(value);
   }
 
   void removeFromTeamALogos(String value) {
-    _teamALogos.remove(value);
+    teamALogos.remove(value);
   }
 
   void removeAtIndexFromTeamALogos(int index) {
-    _teamALogos.removeAt(index);
+    teamALogos.removeAt(index);
   }
 
   void updateTeamALogosAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamALogos[index] = updateFn(_teamALogos[index]);
+    teamALogos[index] = updateFn(_teamALogos[index]);
   }
 
   void insertAtIndexInTeamALogos(int index, String value) {
-    _teamALogos.insert(index, value);
+    teamALogos.insert(index, value);
   }
 
   List<String> _teamBlogos = [];
@@ -164,26 +166,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamBlogos(String value) {
-    _teamBlogos.add(value);
+    teamBlogos.add(value);
   }
 
   void removeFromTeamBlogos(String value) {
-    _teamBlogos.remove(value);
+    teamBlogos.remove(value);
   }
 
   void removeAtIndexFromTeamBlogos(int index) {
-    _teamBlogos.removeAt(index);
+    teamBlogos.removeAt(index);
   }
 
   void updateTeamBlogosAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamBlogos[index] = updateFn(_teamBlogos[index]);
+    teamBlogos[index] = updateFn(_teamBlogos[index]);
   }
 
   void insertAtIndexInTeamBlogos(int index, String value) {
-    _teamBlogos.insert(index, value);
+    teamBlogos.insert(index, value);
   }
 
   bool _groupChat = false;
@@ -205,26 +207,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamLogos(String value) {
-    _teamLogos.add(value);
+    teamLogos.add(value);
   }
 
   void removeFromTeamLogos(String value) {
-    _teamLogos.remove(value);
+    teamLogos.remove(value);
   }
 
   void removeAtIndexFromTeamLogos(int index) {
-    _teamLogos.removeAt(index);
+    teamLogos.removeAt(index);
   }
 
   void updateTeamLogosAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamLogos[index] = updateFn(_teamLogos[index]);
+    teamLogos[index] = updateFn(_teamLogos[index]);
   }
 
   void insertAtIndexInTeamLogos(int index, String value) {
-    _teamLogos.insert(index, value);
+    teamLogos.insert(index, value);
   }
 
   List<String> _teamNames = [];
@@ -234,26 +236,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToTeamNames(String value) {
-    _teamNames.add(value);
+    teamNames.add(value);
   }
 
   void removeFromTeamNames(String value) {
-    _teamNames.remove(value);
+    teamNames.remove(value);
   }
 
   void removeAtIndexFromTeamNames(int index) {
-    _teamNames.removeAt(index);
+    teamNames.removeAt(index);
   }
 
   void updateTeamNamesAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _teamNames[index] = updateFn(_teamNames[index]);
+    teamNames[index] = updateFn(_teamNames[index]);
   }
 
   void insertAtIndexInTeamNames(int index, String value) {
-    _teamNames.insert(index, value);
+    teamNames.insert(index, value);
   }
 
   dynamic _teamlogo;
@@ -275,26 +277,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToFavListCount(bool value) {
-    _favListCount.add(value);
+    favListCount.add(value);
   }
 
   void removeFromFavListCount(bool value) {
-    _favListCount.remove(value);
+    favListCount.remove(value);
   }
 
   void removeAtIndexFromFavListCount(int index) {
-    _favListCount.removeAt(index);
+    favListCount.removeAt(index);
   }
 
   void updateFavListCountAtIndex(
     int index,
     bool Function(bool) updateFn,
   ) {
-    _favListCount[index] = updateFn(_favListCount[index]);
+    favListCount[index] = updateFn(_favListCount[index]);
   }
 
   void insertAtIndexInFavListCount(int index, bool value) {
-    _favListCount.insert(index, value);
+    favListCount.insert(index, value);
   }
 
   List<bool> _rivalListCount = [];
@@ -304,26 +306,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToRivalListCount(bool value) {
-    _rivalListCount.add(value);
+    rivalListCount.add(value);
   }
 
   void removeFromRivalListCount(bool value) {
-    _rivalListCount.remove(value);
+    rivalListCount.remove(value);
   }
 
   void removeAtIndexFromRivalListCount(int index) {
-    _rivalListCount.removeAt(index);
+    rivalListCount.removeAt(index);
   }
 
   void updateRivalListCountAtIndex(
     int index,
     bool Function(bool) updateFn,
   ) {
-    _rivalListCount[index] = updateFn(_rivalListCount[index]);
+    rivalListCount[index] = updateFn(_rivalListCount[index]);
   }
 
   void insertAtIndexInRivalListCount(int index, bool value) {
-    _rivalListCount.insert(index, value);
+    rivalListCount.insert(index, value);
   }
 
   List<bool> _leageListCount = [];
@@ -333,26 +335,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToLeageListCount(bool value) {
-    _leageListCount.add(value);
+    leageListCount.add(value);
   }
 
   void removeFromLeageListCount(bool value) {
-    _leageListCount.remove(value);
+    leageListCount.remove(value);
   }
 
   void removeAtIndexFromLeageListCount(int index) {
-    _leageListCount.removeAt(index);
+    leageListCount.removeAt(index);
   }
 
   void updateLeageListCountAtIndex(
     int index,
     bool Function(bool) updateFn,
   ) {
-    _leageListCount[index] = updateFn(_leageListCount[index]);
+    leageListCount[index] = updateFn(_leageListCount[index]);
   }
 
   void insertAtIndexInLeageListCount(int index, bool value) {
-    _leageListCount.insert(index, value);
+    leageListCount.insert(index, value);
   }
 
   List<bool> _ddInvite = [];
@@ -362,26 +364,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToDdInvite(bool value) {
-    _ddInvite.add(value);
+    ddInvite.add(value);
   }
 
   void removeFromDdInvite(bool value) {
-    _ddInvite.remove(value);
+    ddInvite.remove(value);
   }
 
   void removeAtIndexFromDdInvite(int index) {
-    _ddInvite.removeAt(index);
+    ddInvite.removeAt(index);
   }
 
   void updateDdInviteAtIndex(
     int index,
     bool Function(bool) updateFn,
   ) {
-    _ddInvite[index] = updateFn(_ddInvite[index]);
+    ddInvite[index] = updateFn(_ddInvite[index]);
   }
 
   void insertAtIndexInDdInvite(int index, bool value) {
-    _ddInvite.insert(index, value);
+    ddInvite.insert(index, value);
   }
 
   List<String> _favList = [];
@@ -391,26 +393,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToFavList(String value) {
-    _favList.add(value);
+    favList.add(value);
   }
 
   void removeFromFavList(String value) {
-    _favList.remove(value);
+    favList.remove(value);
   }
 
   void removeAtIndexFromFavList(int index) {
-    _favList.removeAt(index);
+    favList.removeAt(index);
   }
 
   void updateFavListAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _favList[index] = updateFn(_favList[index]);
+    favList[index] = updateFn(_favList[index]);
   }
 
   void insertAtIndexInFavList(int index, String value) {
-    _favList.insert(index, value);
+    favList.insert(index, value);
   }
 
   List<String> _rivalList = [];
@@ -420,26 +422,26 @@ class FFAppState extends ChangeNotifier {
   }
 
   void addToRivalList(String value) {
-    _rivalList.add(value);
+    rivalList.add(value);
   }
 
   void removeFromRivalList(String value) {
-    _rivalList.remove(value);
+    rivalList.remove(value);
   }
 
   void removeAtIndexFromRivalList(int index) {
-    _rivalList.removeAt(index);
+    rivalList.removeAt(index);
   }
 
   void updateRivalListAtIndex(
     int index,
     String Function(String) updateFn,
   ) {
-    _rivalList[index] = updateFn(_rivalList[index]);
+    rivalList[index] = updateFn(_rivalList[index]);
   }
 
   void insertAtIndexInRivalList(int index, String value) {
-    _rivalList.insert(index, value);
+    rivalList.insert(index, value);
   }
 
   String _deleteAction = '';
@@ -459,26 +461,73 @@ class FFAppState extends ChangeNotifier {
   set targetAction(String value) {
     _targetAction = value;
   }
-}
 
-LatLng? _latLngFromString(String? val) {
-  if (val == null) {
-    return null;
+  List<GameStruct> _allGames = [
+    GameStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"0\",\"name\":\"Football\",\"leagues\":\"[\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"1\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NFL\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nFL.png?alt=media&token=f318a03e-b8ba-4256-a7ea-ce23b02b863b\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"12\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nCAA%20.png?alt=media&token=dcd2fe8e-7f6f-4ad4-bacc-397ed21897e3\\\\\\\"}\\\"]\"}')),
+    GameStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"1\",\"name\":\"Basketball\",\"leagues\":\"[\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"11\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NBA\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nBA.png?alt=media&token=e9b8005e-4e16-4de5-96d9-414b40e1caa6\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"12\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"WNBA\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/wNBA.png?alt=media&token=299d8a55-56dd-4592-8ffa-d6d84a75e588\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"13\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA (M)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nBANCAAM.png?alt=media&token=3d6906dc-1c3f-4cc2-b78f-89f09d5b8fec\\\\\\\"}\\\"]\"}')),
+    GameStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"2\",\"name\":\"BaseBall\",\"leagues\":\"[\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"21\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"MLB\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/mLB.png?alt=media&token=bdd29f65-fefc-4693-863c-3453b81597e1\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"22\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA (M)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/mlbNcaa.png?alt=media&token=c3d9c14f-4d28-42f4-83ec-468732f28e41\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"23\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA (w)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/mlbNcaa.png?alt=media&token=c3d9c14f-4d28-42f4-83ec-468732f28e41\\\\\\\"}\\\"]\"}')),
+    GameStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"3\",\"name\":\"Ice Hockey\",\"leagues\":\"[\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"31\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"MLB\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/mLB.png?alt=media&token=bdd29f65-fefc-4693-863c-3453b81597e1\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"32\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA (M)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nHLNCAA.png?alt=media&token=eeb70aae-b0ec-4810-8989-2a671507276d\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"33\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA (w)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nHLNCAA.png?alt=media&token=eeb70aae-b0ec-4810-8989-2a671507276d\\\\\\\"}\\\"]\"}')),
+    GameStruct.fromSerializableMap(jsonDecode(
+        '{\"id\":\"4\",\"name\":\"Soccer\",\"leagues\":\"[\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"41\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"MLS\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/mLS.png?alt=media&token=872e2c8a-fe81-4c21-9073-c079d778b477\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"42\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"WMLS\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/wMLS.png?alt=media&token=b79c26c8-0e7d-423a-b63e-30200e15bcfc\\\\\\\"}\\\",\\\"{\\\\\\\"id\\\\\\\":\\\\\\\"43\\\\\\\",\\\\\\\"name\\\\\\\":\\\\\\\"NCAA(M)\\\\\\\",\\\\\\\"logo\\\\\\\":\\\\\\\"https://firebasestorage.googleapis.com/v0/b/test-project-acx4a7.appspot.com/o/nCAASoccer.png?alt=media&token=a942c0c4-0bbc-4051-8cc1-a13deb7eb91c\\\\\\\"}\\\"]\"}'))
+  ];
+  List<GameStruct> get allGames => _allGames;
+  set allGames(List<GameStruct> value) {
+    _allGames = value;
   }
-  final split = val.split(',');
-  final lat = double.parse(split.first);
-  final lng = double.parse(split.last);
-  return LatLng(lat, lng);
-}
 
-void _safeInit(Function() initializeField) {
-  try {
-    initializeField();
-  } catch (_) {}
-}
+  void addToAllGames(GameStruct value) {
+    allGames.add(value);
+  }
 
-Future _safeInitAsync(Function() initializeField) async {
-  try {
-    await initializeField();
-  } catch (_) {}
+  void removeFromAllGames(GameStruct value) {
+    allGames.remove(value);
+  }
+
+  void removeAtIndexFromAllGames(int index) {
+    allGames.removeAt(index);
+  }
+
+  void updateAllGamesAtIndex(
+    int index,
+    GameStruct Function(GameStruct) updateFn,
+  ) {
+    allGames[index] = updateFn(_allGames[index]);
+  }
+
+  void insertAtIndexInAllGames(int index, GameStruct value) {
+    allGames.insert(index, value);
+  }
+
+  List<int> _SelectedLeague = [];
+  List<int> get SelectedLeague => _SelectedLeague;
+  set SelectedLeague(List<int> value) {
+    _SelectedLeague = value;
+  }
+
+  void addToSelectedLeague(int value) {
+    SelectedLeague.add(value);
+  }
+
+  void removeFromSelectedLeague(int value) {
+    SelectedLeague.remove(value);
+  }
+
+  void removeAtIndexFromSelectedLeague(int index) {
+    SelectedLeague.removeAt(index);
+  }
+
+  void updateSelectedLeagueAtIndex(
+    int index,
+    int Function(int) updateFn,
+  ) {
+    SelectedLeague[index] = updateFn(_SelectedLeague[index]);
+  }
+
+  void insertAtIndexInSelectedLeague(int index, int value) {
+    SelectedLeague.insert(index, value);
+  }
 }

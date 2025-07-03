@@ -3,16 +3,18 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'comet_chat_model.dart';
 export 'comet_chat_model.dart';
 
 class CometChatWidget extends StatefulWidget {
   const CometChatWidget({super.key});
 
+  static String routeName = 'CometChat';
+  static String routePath = '/cometChat';
+
   @override
-  _CometChatWidgetState createState() => _CometChatWidgetState();
+  State<CometChatWidget> createState() => _CometChatWidgetState();
 }
 
 class _CometChatWidgetState extends State<CometChatWidget> {
@@ -35,21 +37,11 @@ class _CometChatWidgetState extends State<CometChatWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -59,12 +51,22 @@ class _CometChatWidgetState extends State<CometChatWidget> {
           title: Text(
             'Comet Chat',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Barlow Condensed',
+                  font: GoogleFonts.barlowCondensed(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: Colors.white,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -74,7 +76,7 @@ class _CometChatWidgetState extends State<CometChatWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(18.0, 10.0, 18.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(18.0, 10.0, 18.0, 0.0),
                 child: StreamBuilder<List<UsersRecord>>(
                   stream: queryUsersRecord(),
                   builder: (context, snapshot) {
@@ -95,13 +97,14 @@ class _CometChatWidgetState extends State<CometChatWidget> {
                     List<UsersRecord> rowUsersRecordList = snapshot.data!
                         .where((u) => u.uid != currentUserUid)
                         .toList();
+
                     return Row(
                       mainAxisSize: MainAxisSize.max,
                       children:
                           List.generate(rowUsersRecordList.length, (rowIndex) {
                         final rowUsersRecord = rowUsersRecordList[rowIndex];
                         return Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 10.0, 0.0),
                           child: Container(
                             width: 50.0,

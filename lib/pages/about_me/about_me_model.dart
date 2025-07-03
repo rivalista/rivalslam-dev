@@ -1,50 +1,47 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'about_me_widget.dart' show AboutMeWidget;
 import 'package:flutter/material.dart';
 
 class AboutMeModel extends FlutterFlowModel<AboutMeWidget> {
+  ///  Local state fields for this page.
+
+  String title = '';
+
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for txtusername widget.
   FocusNode? txtusernameFocusNode;
-  TextEditingController? txtusernameController;
-  String? Function(BuildContext, String?)? txtusernameControllerValidator;
+  TextEditingController? txtusernameTextController;
+  String? Function(BuildContext, String?)? txtusernameTextControllerValidator;
   // State field(s) for txtcollage widget.
   FocusNode? txtcollageFocusNode;
-  TextEditingController? txtcollageController;
-  String? Function(BuildContext, String?)? txtcollageControllerValidator;
+  TextEditingController? txtcollageTextController;
+  String? Function(BuildContext, String?)? txtcollageTextControllerValidator;
   // State field(s) for txthomeTown widget.
   FocusNode? txthomeTownFocusNode;
-  TextEditingController? txthomeTownController;
-  String? Function(BuildContext, String?)? txthomeTownControllerValidator;
+  TextEditingController? txthomeTownTextController;
+  String? Function(BuildContext, String?)? txthomeTownTextControllerValidator;
   // State field(s) for txtlivesIn widget.
   FocusNode? txtlivesInFocusNode;
-  TextEditingController? txtlivesInController;
-  String? Function(BuildContext, String?)? txtlivesInControllerValidator;
-
-  /// Initialization and disposal methods.
+  TextEditingController? txtlivesInTextController;
+  String? Function(BuildContext, String?)? txtlivesInTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     txtusernameFocusNode?.dispose();
-    txtusernameController?.dispose();
+    txtusernameTextController?.dispose();
 
     txtcollageFocusNode?.dispose();
-    txtcollageController?.dispose();
+    txtcollageTextController?.dispose();
 
     txthomeTownFocusNode?.dispose();
-    txthomeTownController?.dispose();
+    txthomeTownTextController?.dispose();
 
     txtlivesInFocusNode?.dispose();
-    txtlivesInController?.dispose();
+    txtlivesInTextController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

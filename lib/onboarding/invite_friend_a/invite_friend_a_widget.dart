@@ -6,8 +6,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'invite_friend_a_model.dart';
 export 'invite_friend_a_model.dart';
@@ -15,8 +16,11 @@ export 'invite_friend_a_model.dart';
 class InviteFriendAWidget extends StatefulWidget {
   const InviteFriendAWidget({super.key});
 
+  static String routeName = 'InviteFriendA';
+  static String routePath = '/inviteFriendA';
+
   @override
-  _InviteFriendAWidgetState createState() => _InviteFriendAWidgetState();
+  State<InviteFriendAWidget> createState() => _InviteFriendAWidgetState();
 }
 
 class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
@@ -39,33 +43,25 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(130.0),
+          preferredSize: Size.fromHeight(130.0),
           child: AppBar(
-            backgroundColor: const Color(0xFF0A0A0A),
+            backgroundColor: Color(0xFF0A0A0A),
             automaticallyImplyLeading: false,
-            actions: const [],
+            actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +69,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +79,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                             borderRadius: 30.0,
                             borderWidth: 1.0,
                             buttonSize: 50.0,
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.arrow_back_rounded,
                               color: Colors.white,
                               size: 30.0,
@@ -97,15 +93,19 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow',
+                                  font: GoogleFonts.barlow(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                   color: Colors.white,
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
                                   fontStyle: FontStyle.italic,
                                 ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -113,19 +113,35 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                context.pushNamed('InviteFriendB');
+                                context
+                                    .pushNamed(InviteFriendBWidget.routeName);
 
-                                context.pushNamed('InviteFriendB');
+                                context
+                                    .pushNamed(InviteFriendBWidget.routeName);
                               },
                               child: Text(
                                 'Done',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Roboto',
+                                      font: GoogleFonts.roboto(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color: FlutterFlowTheme.of(context)
                                           .customColor1,
                                       fontSize: 15.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
@@ -140,7 +156,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
               expandedTitleScale: 1.0,
             ),
             bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(40.0),
+              preferredSize: Size.fromHeight(40.0),
               child: Container(),
             ),
             toolbarHeight: 44.0,
@@ -153,13 +169,16 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 18.0, 0.0, 0.0),
                 child: Text(
                   'SPORTS IS ALWAYS FUN HANGING WITH YOUR FRIENDS. IT\'S EVEN MORE FUN WHEN YOU\'RE SLAMMIN\' THEM',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Barlow Condensed',
-                        color: const Color(0xFF6E6E6E),
+                        font: GoogleFonts.barlowCondensed(
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        color: Color(0xFF6E6E6E),
                         fontSize: 16.0,
                         letterSpacing: 1.04,
                         fontWeight: FontWeight.w600,
@@ -168,20 +187,27 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                 child: Text(
                   'Invite your buddies already on RivalSlam to\n your Friend Circle',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Roboto',
-                        color: const Color(0xFFB4B4B4),
+                        font: GoogleFonts.roboto(
+                          fontWeight: FontWeight.normal,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
+                        color: Color(0xFFB4B4B4),
                         fontSize: 15.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.normal,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -191,9 +217,9 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                         Container(
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: MediaQuery.sizeOf(context).height * 0.35,
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 12.0, 0.0, 12.0, 0.0),
                             child: StreamBuilder<List<UserBuddiesRecord>>(
                               stream: queryUserBuddiesRecord(
@@ -220,6 +246,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                 List<UserBuddiesRecord>
                                     listViewUserBuddiesRecordList =
                                     snapshot.data!;
+
                                 return ListView.builder(
                                   padding: EdgeInsets.zero,
                                   scrollDirection: Axis.vertical,
@@ -233,13 +260,13 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                       width: MediaQuery.sizeOf(context).width *
                                           1.0,
                                       height: 75.0,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 4.0, 0.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -265,7 +292,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   8.0,
                                                                   0.0,
@@ -285,7 +312,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                             children: [
                                                               Container(
                                                                 decoration:
-                                                                    const BoxDecoration(),
+                                                                    BoxDecoration(),
                                                                 child: Row(
                                                                   mainAxisSize:
                                                                       MainAxisSize
@@ -301,12 +328,21 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                               context)
                                                                           .bodyMedium
                                                                           .override(
-                                                                            fontFamily:
-                                                                                'Roboto',
+                                                                            font:
+                                                                                GoogleFonts.roboto(
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                            ),
                                                                             color:
-                                                                                const Color(0xFFB4B4B4),
+                                                                                Color(0xFFB4B4B4),
                                                                             fontSize:
                                                                                 14.0,
+                                                                            letterSpacing:
+                                                                                0.0,
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                           ),
                                                                     ),
                                                                   ],
@@ -316,7 +352,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         3.0,
@@ -329,7 +365,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                               children: [
                                                                 Container(
                                                                   decoration:
-                                                                      const BoxDecoration(),
+                                                                      BoxDecoration(),
                                                                   child: Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
@@ -340,9 +376,15 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
-                                                                              fontFamily: 'Roboto',
+                                                                              font: GoogleFonts.roboto(
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
                                                                               color: FlutterFlowTheme.of(context).accent4,
                                                                               fontSize: 12.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
                                                                       ),
                                                                       StreamBuilder<
@@ -374,6 +416,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                           List<UserTeamFavRecord>
                                                                               textUserTeamFavRecordList =
                                                                               snapshot.data!;
+
                                                                           return Text(
                                                                             valueOrDefault<String>(
                                                                               functions.getFavRivalList(textUserTeamFavRecordList.map((e) => e.name).toList()),
@@ -383,9 +426,15 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                               replacement: '…',
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Barlow Semi Condensed',
-                                                                                  color: const Color(0xFF8B8D8E),
+                                                                                  font: GoogleFonts.barlowSemiCondensed(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  color: Color(0xFF8B8D8E),
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                 ),
                                                                           );
                                                                         },
@@ -398,7 +447,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         3.0,
@@ -411,7 +460,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                               children: [
                                                                 Container(
                                                                   decoration:
-                                                                      const BoxDecoration(),
+                                                                      BoxDecoration(),
                                                                   child: Row(
                                                                     mainAxisSize:
                                                                         MainAxisSize
@@ -422,9 +471,15 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
-                                                                              fontFamily: 'Roboto',
+                                                                              font: GoogleFonts.roboto(
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
                                                                               color: FlutterFlowTheme.of(context).alternate,
                                                                               fontSize: 12.0,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                              fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                             ),
                                                                       ),
                                                                       StreamBuilder<
@@ -456,6 +511,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                           List<UserTeamRivalsRecord>
                                                                               textUserTeamRivalsRecordList =
                                                                               snapshot.data!;
+
                                                                           return Text(
                                                                             valueOrDefault<String>(
                                                                               functions.getFavRivalList(textUserTeamRivalsRecordList.map((e) => e.name).toList()),
@@ -465,9 +521,15 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                                               replacement: '…',
                                                                             ),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                  fontFamily: 'Barlow Semi Condensed',
-                                                                                  color: const Color(0xFF8B8D8E),
+                                                                                  font: GoogleFonts.barlowSemiCondensed(
+                                                                                    fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                    fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                  ),
+                                                                                  color: Color(0xFF8B8D8E),
                                                                                   fontSize: 12.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                                                                                 ),
                                                                           );
                                                                         },
@@ -498,11 +560,10 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
-                                                          setState(() {
-                                                            FFAppState()
-                                                                .addToDdInvite(
-                                                                    false);
-                                                          });
+                                                          FFAppState()
+                                                              .addToDdInvite(
+                                                                  false);
+                                                          safeSetState(() {});
                                                         },
                                                         child: Icon(
                                                           Icons.check,
@@ -541,7 +602,7 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                               ],
                                             ),
                                           ),
-                                          const Opacity(
+                                          Opacity(
                                             opacity: 0.6,
                                             child: Divider(
                                               thickness: 1.0,
@@ -549,7 +610,9 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                                             ),
                                           ),
                                           if (FFAppState()
-                                                  .ddInvite[listViewIndex] ==
+                                                  .ddInvite
+                                                  .elementAtOrNull(
+                                                      listViewIndex) ==
                                               true)
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -573,8 +636,8 @@ class _InviteFriendAWidgetState extends State<InviteFriendAWidget> {
                         ),
                         wrapWithModel(
                           model: _model.inviteBuddiesModel,
-                          updateCallback: () => setState(() {}),
-                          child: const InviteBuddiesWidget(),
+                          updateCallback: () => safeSetState(() {}),
+                          child: InviteBuddiesWidget(),
                         ),
                       ],
                     ),

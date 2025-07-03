@@ -1,17 +1,19 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'splash_model.dart';
 export 'splash_model.dart';
 
 class SplashWidget extends StatefulWidget {
   const SplashWidget({super.key});
 
+  static String routeName = 'splash';
+  static String routePath = '/splash';
+
   @override
-  _SplashWidgetState createState() => _SplashWidgetState();
+  State<SplashWidget> createState() => _SplashWidgetState();
 }
 
 class _SplashWidgetState extends State<SplashWidget> {
@@ -28,16 +30,7 @@ class _SplashWidgetState extends State<SplashWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 3000));
 
-      context.pushNamed(
-        'Welcome',
-        extra: <String, dynamic>{
-          kTransitionInfoKey: const TransitionInfo(
-            hasTransition: true,
-            transitionType: PageTransitionType.topToBottom,
-            duration: Duration(milliseconds: 500),
-          ),
-        },
-      );
+      context.pushNamed(WelcomeWidget.routeName);
     });
   }
 
@@ -50,17 +43,6 @@ class _SplashWidgetState extends State<SplashWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).customColor1,
@@ -83,14 +65,15 @@ class _SplashWidgetState extends State<SplashWidget> {
             ),
           ),
           Align(
-            alignment: const AlignmentDirectional(1.0, -1.0),
+            alignment: AlignmentDirectional(0.0, -1.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 200.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 200.0, 0.0, 0.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
-                  'assets/images/Bitmap_(6).png',
-                  fit: BoxFit.cover,
+                  'assets/images/RIVALSLAM_LOGO__WHITE_Palm-GREEN_Slam-CLEAR_Star.png',
+                  fit: BoxFit.contain,
+                  alignment: Alignment(0.0, 0.0),
                 ),
               ),
             ),

@@ -1,10 +1,9 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'about_me_model.dart';
 export 'about_me_model.dart';
@@ -12,13 +11,16 @@ export 'about_me_model.dart';
 class AboutMeWidget extends StatefulWidget {
   const AboutMeWidget({
     super.key,
-    required this.userName,
+    this.userName,
   });
 
   final String? userName;
 
+  static String routeName = 'AboutMe';
+  static String routePath = '/aboutMe';
+
   @override
-  _AboutMeWidgetState createState() => _AboutMeWidgetState();
+  State<AboutMeWidget> createState() => _AboutMeWidgetState();
 }
 
 class _AboutMeWidgetState extends State<AboutMeWidget> {
@@ -31,17 +33,17 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
     super.initState();
     _model = createModel(context, () => AboutMeModel());
 
-    _model.txtusernameController ??=
+    _model.txtusernameTextController ??=
         TextEditingController(text: widget.userName);
     _model.txtusernameFocusNode ??= FocusNode();
 
-    _model.txtcollageController ??= TextEditingController();
+    _model.txtcollageTextController ??= TextEditingController();
     _model.txtcollageFocusNode ??= FocusNode();
 
-    _model.txthomeTownController ??= TextEditingController();
+    _model.txthomeTownTextController ??= TextEditingController();
     _model.txthomeTownFocusNode ??= FocusNode();
 
-    _model.txtlivesInController ??= TextEditingController();
+    _model.txtlivesInTextController ??= TextEditingController();
     _model.txtlivesInFocusNode ??= FocusNode();
   }
 
@@ -54,30 +56,22 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryText,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(140.0),
+          preferredSize: Size.fromHeight(140.0),
           child: AppBar(
             backgroundColor: FlutterFlowTheme.of(context).customColor1,
             automaticallyImplyLeading: false,
-            actions: const [],
+            actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Stack(
                 children: [
@@ -90,10 +84,10 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -108,7 +102,7 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                                 borderRadius: 30.0,
                                 borderWidth: 1.0,
                                 buttonSize: 50.0,
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.arrow_back_rounded,
                                   color: Colors.white,
                                   size: 30.0,
@@ -122,15 +116,19 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Barlow',
+                                      font: GoogleFonts.barlow(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FontStyle.italic,
+                                      ),
                                       color: Colors.white,
                                       fontSize: 24.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.italic,
                                     ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -139,9 +137,9 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     context.pushNamed(
-                                      'OnboardingFavorite',
+                                      TapLeaguesViewWidget.routeName,
                                       extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
+                                        kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,
                                           transitionType:
                                               PageTransitionType.bottomToTop,
@@ -155,9 +153,27 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Roboto',
+                                          font: GoogleFonts.roboto(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: Colors.white,
                                           fontSize: 15.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
@@ -165,15 +181,29 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                             ],
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               'Step 2/5',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Barlow Semi Condensed',
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     fontSize: 15.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -197,9 +227,9 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
               Opacity(
                 opacity: 0.7,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.txtusernameController,
+                    controller: _model.txtusernameTextController,
                     focusNode: _model.txtusernameFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -207,13 +237,41 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                       labelText: 'Username',
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       hintStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -244,10 +302,25 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                     ),
-                    style: FlutterFlowTheme.of(context).titleSmall,
-                    validator: _model.txtusernameControllerValidator
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.barlowSemiCondensed(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    validator: _model.txtusernameTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -255,9 +328,9 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
               Opacity(
                 opacity: 0.7,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.txtcollageController,
+                    controller: _model.txtcollageTextController,
                     focusNode: _model.txtcollageFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -265,13 +338,41 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                       labelText: 'College  (If Applicable)',
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       hintStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -302,10 +403,25 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                     ),
-                    style: FlutterFlowTheme.of(context).titleSmall,
-                    validator: _model.txtcollageControllerValidator
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.barlowSemiCondensed(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    validator: _model.txtcollageTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -313,9 +429,9 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
               Opacity(
                 opacity: 0.7,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.txthomeTownController,
+                    controller: _model.txthomeTownTextController,
                     focusNode: _model.txthomeTownFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -323,13 +439,41 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                       labelText: 'Hometown',
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       hintStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -360,10 +504,25 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                     ),
-                    style: FlutterFlowTheme.of(context).titleSmall,
-                    validator: _model.txthomeTownControllerValidator
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.barlowSemiCondensed(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    validator: _model.txthomeTownTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
@@ -371,9 +530,9 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
               Opacity(
                 opacity: 0.7,
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                   child: TextFormField(
-                    controller: _model.txtlivesInController,
+                    controller: _model.txtlivesInTextController,
                     focusNode: _model.txtlivesInFocusNode,
                     autofocus: true,
                     obscureText: false,
@@ -381,13 +540,41 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                       labelText: 'Lives in',
                       labelStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       hintStyle:
                           FlutterFlowTheme.of(context).labelMedium.override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .labelMedium
+                                    .fontStyle,
                               ),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -418,64 +605,44 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                     ),
-                    style: FlutterFlowTheme.of(context).titleSmall,
-                    validator: _model.txtlivesInControllerValidator
+                    style: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.barlowSemiCondensed(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
+                        ),
+                    validator: _model.txtlivesInTextControllerValidator
                         .asValidator(context),
                   ),
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(1.0, 0.0),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 106.0, 16.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 106.0, 16.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      await currentUserReference!.update(createUsersRecordData(
-                        displayName: _model.txtusernameController.text,
-                        photoUrl: FFAppState().profileImg,
-                        collage: _model.txtcollageController.text,
-                        homeTown: _model.txthomeTownController.text,
-                        livesIn: _model.txtlivesInController.text,
-                      ));
-
-                      context.pushNamed(
-                        'FellowFilledin',
-                        queryParameters: {
-                          'userName': serializeParam(
-                            _model.txtusernameController.text,
-                            ParamType.String,
-                          ),
-                          'college': serializeParam(
-                            _model.txtcollageController.text,
-                            ParamType.String,
-                          ),
-                          'homeTowm': serializeParam(
-                            _model.txthomeTownController.text,
-                            ParamType.String,
-                          ),
-                          'livesIn': serializeParam(
-                            _model.txtlivesInController.text,
-                            ParamType.String,
-                          ),
-                        }.withoutNulls,
-                        extra: <String, dynamic>{
-                          kTransitionInfoKey: const TransitionInfo(
-                            hasTransition: true,
-                            transitionType: PageTransitionType.bottomToTop,
-                            duration: Duration(milliseconds: 200),
-                          ),
-                        },
-                      );
+                      context.pushNamed(TapLeaguesViewWidget.routeName);
                     },
                     child: RichText(
-                      textScaleFactor: MediaQuery.of(context).textScaleFactor,
+                      textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
                           TextSpan(
@@ -483,16 +650,36 @@ class _AboutMeWidgetState extends State<AboutMeWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Barlow Semi Condensed',
+                                  font: GoogleFonts.barlowSemiCondensed(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FontStyle.italic,
+                                  ),
                                   color:
                                       FlutterFlowTheme.of(context).customColor1,
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
                                   fontStyle: FontStyle.italic,
                                 ),
                           )
                         ],
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.barlowSemiCondensed(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                       ),
                     ),
                   ),

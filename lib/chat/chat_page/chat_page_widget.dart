@@ -1,10 +1,9 @@
 import '/flutter_flow/chat/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'chat_page_model.dart';
 export 'chat_page_model.dart';
 
@@ -18,8 +17,11 @@ class ChatPageWidget extends StatefulWidget {
   final UsersRecord? chatUser;
   final DocumentReference? chatRef;
 
+  static String routeName = 'ChatPage';
+  static String routePath = '/chatPage';
+
   @override
-  _ChatPageWidgetState createState() => _ChatPageWidgetState();
+  State<ChatPageWidget> createState() => _ChatPageWidgetState();
 }
 
 class _ChatPageWidgetState extends State<ChatPageWidget> {
@@ -48,9 +50,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
       chatReference: widget.chatRef,
     )
         .listen((info) {
-      if (mounted) {
-        setState(() => _chatInfo = info);
-      }
+      safeSetState(() => _chatInfo = info);
     });
   }
 
@@ -63,20 +63,9 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: const Color(0xFF202021),
+      backgroundColor: Color(0xFF202021),
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).customColor1,
         automaticallyImplyLeading: false,
@@ -95,33 +84,47 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
           },
         ),
         title: Align(
-          alignment: const AlignmentDirectional(-1.0, 0.0),
+          alignment: AlignmentDirectional(-1.0, 0.0),
           child: Stack(
             children: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   'Hello World',
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Barlow Condensed',
+                        font: GoogleFonts.barlowCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         fontSize: 18.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.w500,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   valueOrDefault<String>(
                     widget.chatUser?.displayName,
                     'group name',
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Barlow Condensed',
+                        font: GoogleFonts.barlowCondensed(
+                          fontWeight: FontWeight.w500,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                        ),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         fontSize: 18.0,
+                        letterSpacing: 0.0,
                         fontWeight: FontWeight.w500,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                       ),
                 ),
               ),
@@ -130,14 +133,14 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 14.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 14.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
               focusColor: Colors.transparent,
               hoverColor: Colors.transparent,
               highlightColor: Colors.transparent,
               onTap: () async {
-                context.pushNamed('CreateGroupChatPage');
+                context.pushNamed(CreateGroupChatPageWidget.routeName);
               },
               child: Icon(
                 Icons.group_add,
@@ -161,7 +164,7 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
               ? FFChatPage(
                   chatInfo: snapshot.data!,
                   allowImages: true,
-                  backgroundColor: const Color(0xFF202021),
+                  backgroundColor: Color(0xFF202021),
                   timeDisplaySetting: TimeDisplaySetting.visibleOnTap,
                   currentUserBoxDecoration: BoxDecoration(
                     border: Border.all(
@@ -175,27 +178,23 @@ class _ChatPageWidgetState extends State<ChatPageWidget> {
                     ),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
-                  currentUserTextStyle: GoogleFonts.getFont(
-                    'Barlow Condensed',
+                  currentUserTextStyle: GoogleFonts.barlowCondensed(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                     fontWeight: FontWeight.w500,
                     fontSize: 14.0,
                     fontStyle: FontStyle.normal,
                   ),
-                  otherUsersTextStyle: GoogleFonts.getFont(
-                    'Barlow Condensed',
-                    color: const Color(0xFF8B8D8E),
+                  otherUsersTextStyle: GoogleFonts.barlowCondensed(
+                    color: Color(0xFF8B8D8E),
                     fontWeight: FontWeight.w500,
                     fontSize: 14.0,
                   ),
-                  inputHintTextStyle: GoogleFonts.getFont(
-                    'Barlow Condensed',
-                    color: const Color(0xFF95A1AC),
+                  inputHintTextStyle: GoogleFonts.barlowCondensed(
+                    color: Color(0xFF95A1AC),
                     fontWeight: FontWeight.normal,
                     fontSize: 14.0,
                   ),
-                  inputTextStyle: GoogleFonts.getFont(
-                    'Barlow Condensed',
+                  inputTextStyle: GoogleFonts.barlowCondensed(
                     color: Colors.black,
                     fontWeight: FontWeight.normal,
                     fontSize: 14.0,

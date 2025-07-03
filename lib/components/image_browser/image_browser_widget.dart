@@ -3,7 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'image_browser_model.dart';
 export 'image_browser_model.dart';
 
@@ -11,7 +11,7 @@ class ImageBrowserWidget extends StatefulWidget {
   const ImageBrowserWidget({super.key});
 
   @override
-  _ImageBrowserWidgetState createState() => _ImageBrowserWidgetState();
+  State<ImageBrowserWidget> createState() => _ImageBrowserWidgetState();
 }
 
 class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
@@ -38,8 +38,6 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: 220.0,
@@ -74,7 +72,8 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                       if (selectedMedia != null &&
                           selectedMedia.every((m) =>
                               validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isDataUploading1 = true);
+                        safeSetState(
+                            () => _model.isDataUploading_uploadDataAxn = true);
                         var selectedUploadedFiles = <FFUploadedFile>[];
 
                         var downloadUrls = <String>[];
@@ -99,25 +98,26 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                               .map((u) => u!)
                               .toList();
                         } finally {
-                          _model.isDataUploading1 = false;
+                          _model.isDataUploading_uploadDataAxn = false;
                         }
                         if (selectedUploadedFiles.length ==
                                 selectedMedia.length &&
                             downloadUrls.length == selectedMedia.length) {
-                          setState(() {
-                            _model.uploadedLocalFile1 =
+                          safeSetState(() {
+                            _model.uploadedLocalFile_uploadDataAxn =
                                 selectedUploadedFiles.first;
-                            _model.uploadedFileUrl1 = downloadUrls.first;
+                            _model.uploadedFileUrl_uploadDataAxn =
+                                downloadUrls.first;
                           });
                         } else {
-                          setState(() {});
+                          safeSetState(() {});
                           return;
                         }
                       }
 
-                      setState(() {
-                        FFAppState().profileImg = _model.uploadedFileUrl1;
-                      });
+                      FFAppState().profileImg =
+                          _model.uploadedFileUrl_uploadDataAxn;
+                      safeSetState(() {});
                       Navigator.pop(context);
                     },
                     child: Row(
@@ -129,10 +129,19 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FontStyle.italic,
+                                ),
                                 color:
                                     FlutterFlowTheme.of(context).customColor1,
                                 fontSize: 20.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
                                 fontStyle: FontStyle.italic,
                               ),
                         ),
@@ -170,7 +179,8 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                       if (selectedMedia != null &&
                           selectedMedia.every((m) =>
                               validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isDataUploading2 = true);
+                        safeSetState(
+                            () => _model.isDataUploading_uploadDataTfk = true);
                         var selectedUploadedFiles = <FFUploadedFile>[];
 
                         var downloadUrls = <String>[];
@@ -195,25 +205,26 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                               .map((u) => u!)
                               .toList();
                         } finally {
-                          _model.isDataUploading2 = false;
+                          _model.isDataUploading_uploadDataTfk = false;
                         }
                         if (selectedUploadedFiles.length ==
                                 selectedMedia.length &&
                             downloadUrls.length == selectedMedia.length) {
-                          setState(() {
-                            _model.uploadedLocalFile2 =
+                          safeSetState(() {
+                            _model.uploadedLocalFile_uploadDataTfk =
                                 selectedUploadedFiles.first;
-                            _model.uploadedFileUrl2 = downloadUrls.first;
+                            _model.uploadedFileUrl_uploadDataTfk =
+                                downloadUrls.first;
                           });
                         } else {
-                          setState(() {});
+                          safeSetState(() {});
                           return;
                         }
                       }
 
-                      setState(() {
-                        FFAppState().profileImg = _model.uploadedFileUrl2;
-                      });
+                      FFAppState().profileImg =
+                          _model.uploadedFileUrl_uploadDataTfk;
+                      safeSetState(() {});
                       Navigator.pop(context);
                     },
                     child: Row(
@@ -225,10 +236,19 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Barlow Semi Condensed',
+                                font: GoogleFonts.barlowSemiCondensed(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FontStyle.italic,
+                                ),
                                 color:
                                     FlutterFlowTheme.of(context).customColor1,
                                 fontSize: 20.0,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
                                 fontStyle: FontStyle.italic,
                               ),
                         ),
@@ -269,9 +289,18 @@ class _ImageBrowserWidgetState extends State<ImageBrowserWidget> {
                           'CANCEL',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Barlow Semi Condensed',
-                                    color: const Color(0xFF8B8D8E),
+                                    font: GoogleFonts.barlowSemiCondensed(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                    color: Color(0xFF8B8D8E),
                                     fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
                                     fontStyle: FontStyle.italic,
                                   ),
                         ),

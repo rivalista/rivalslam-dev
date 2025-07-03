@@ -5,25 +5,19 @@ import 'package:flutter/material.dart';
 class ImageBrowserModel extends FlutterFlowModel<ImageBrowserWidget> {
   ///  State fields for stateful widgets in this component.
 
-  bool isDataUploading1 = false;
-  FFUploadedFile uploadedLocalFile1 =
+  bool isDataUploading_uploadDataAxn = false;
+  FFUploadedFile uploadedLocalFile_uploadDataAxn =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl1 = '';
+  String uploadedFileUrl_uploadDataAxn = '';
 
-  bool isDataUploading2 = false;
-  FFUploadedFile uploadedLocalFile2 =
+  bool isDataUploading_uploadDataTfk = false;
+  FFUploadedFile uploadedLocalFile_uploadDataTfk =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl2 = '';
-
-  /// Initialization and disposal methods.
+  String uploadedFileUrl_uploadDataTfk = '';
 
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {}
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }
